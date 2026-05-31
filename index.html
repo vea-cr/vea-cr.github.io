@@ -78,6 +78,20 @@
       color: #facc15;
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    
+    .top-logo {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      border-radius: 12px;
+      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
+    }
+    
     .hero {
       padding: 72px 8% 82px;
       display: grid;
@@ -340,6 +354,15 @@
         display: none;
       }
 
+      .header-right {
+      gap: 0;
+    }
+    
+    .top-logo {
+      width: 46px;
+      height: 46px;
+    }
+
       .hero {
         grid-template-columns: 1fr;
         padding: 58px 6% 62px;
@@ -378,18 +401,22 @@
 
 <body>
   <header>
-    <div class="brand">
-      <div class="brand-mark">V</div>
-      <div class="logo">VEA-CR</div>
-    </div>
-
-    <nav>
-      <a href="#about">组织介绍</a>
-      <a href="#honor">组织特色</a>
-      <a href="#requirements">加入门槛</a>
-      <a href="#apply">申请加入</a>
-    </nav>
-  </header>
+      <div class="brand">
+        <div class="brand-mark">V</div>
+        <div class="logo">VEA-CR</div>
+      </div>
+    
+      <div class="header-right">
+        <nav>
+          <a href="#about">组织介绍</a>
+          <a href="#honor">组织特色</a>
+          <a href="#requirements">加入门槛</a>
+          <a href="#apply">申请加入</a>
+        </nav>
+    
+        <img class="top-logo" src="logo.png" alt="VEA logo">
+      </div>
+    </header>
 
   <main>
     <section class="hero">
@@ -444,7 +471,7 @@
         </div>
 
         <div class="info-box">
-          <img class="feature-img" src="Knight.png" alt="Knight">
+          <img class="feature-img" src="crown.png" alt="Crown">
           <h3>长期建设</h3>
           <p>VEA 不只是临时招人群，而是希望逐步建设成有成员体系、荣誉记录和组织文化的玩家组织。</p>
         </div>
@@ -455,7 +482,7 @@
       <h2 class="section-title">组织特色</h2>
 
       <div class="honor">
-        <img src="Dark_knight.png" alt="VEA battle character">
+        <img src="Ultimate.png" alt="VEA ultimate character">
 
         <div class="honor-list">
           <div class="honor-item">
