@@ -1,13 +1,324 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VEA-CR</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VEA-CR | 皇室战争国服组织</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(139, 92, 246, 0.28), transparent 35%),
+        radial-gradient(circle at top right, rgba(245, 158, 11, 0.25), transparent 30%),
+        linear-gradient(135deg, #07111f 0%, #111827 55%, #050816 100%);
+      color: #f9fafb;
+      min-height: 100vh;
+    }
+
+    header {
+      width: 100%;
+      padding: 22px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: #facc15;
+    }
+
+    nav a {
+      color: #d1d5db;
+      text-decoration: none;
+      margin-left: 28px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: #facc15;
+    }
+
+    .hero {
+      padding: 90px 8% 70px;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid rgba(250, 204, 21, 0.45);
+      border-radius: 999px;
+      color: #facc15;
+      background: rgba(250, 204, 21, 0.08);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(48px, 8vw, 92px);
+      line-height: 0.95;
+      font-weight: 950;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+
+    .highlight {
+      color: #a78bfa;
+    }
+
+    .subtitle {
+      max-width: 680px;
+      font-size: 20px;
+      line-height: 1.8;
+      color: #d1d5db;
+      margin-bottom: 34px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 24px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #facc15, #f59e0b);
+      color: #111827;
+      box-shadow: 0 10px 30px rgba(245, 158, 11, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #f9fafb;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .card {
+      padding: 28px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    .rank {
+      font-size: 18px;
+      color: #d1d5db;
+      margin-bottom: 8px;
+    }
+
+    .number {
+      font-size: 64px;
+      font-weight: 950;
+      color: #c084fc;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #d1d5db;
+      line-height: 1.7;
+    }
+
+    section {
+      padding: 50px 8%;
+    }
+
+    .section-title {
+      font-size: 34px;
+      margin-bottom: 28px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .info-box {
+      padding: 26px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .info-box h3 {
+      color: #facc15;
+      margin-bottom: 12px;
+      font-size: 21px;
+    }
+
+    .info-box p,
+    .info-box li {
+      color: #d1d5db;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    ul {
+      padding-left: 18px;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 32px 8%;
+      color: #9ca3af;
+      font-size: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    @media (max-width: 820px) {
+      header {
+        padding: 18px 6%;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 70px 6% 45px;
+      }
+
+      section {
+        padding: 40px 6%;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .number {
+        font-size: 52px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>VEA-CR</h1>
-  <p>皇室战争国服 VEA 组织官网正在搭建中。</p>
-  <p>紫水晶 1900+ 招新中。</p>
+  <header>
+    <div class="logo">VEA-CR</div>
+    <nav>
+      <a href="#about">组织介绍</a>
+      <a href="#requirements">加入门槛</a>
+      <a href="#apply">申请加入</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="tag">皇室战争国服 · 竞技组织</div>
+        <h1>VEA<br><span class="highlight">招新中</span></h1>
+        <p class="subtitle">
+          VEA 是面向皇室战争国服高活跃玩家的竞技型组织。我们欢迎有稳定实力、愿意交流、愿意参与组织活动的玩家加入。
+        </p>
+
+        <div class="buttons">
+          <a class="btn btn-primary" href="#apply">申请加入</a>
+          <a class="btn btn-secondary" href="#requirements">查看门槛</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="rank">当前招新门槛</div>
+        <div class="number">1900+</div>
+        <p>紫水晶段位要求。申请者需具备稳定活跃度、基本沟通能力，以及对皇室战争竞技内容的长期兴趣。</p>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">关于 VEA</h2>
+      <div class="grid">
+        <div class="info-box">
+          <h3>竞技导向</h3>
+          <p>以天梯、锦标赛、内部交流和实战复盘为核心，重视玩家长期实力提升。</p>
+        </div>
+
+        <div class="info-box">
+          <h3>活跃社群</h3>
+          <p>组织成员保持稳定交流，围绕卡组、版本环境、对局思路和赛事信息展开讨论。</p>
+        </div>
+
+        <div class="info-box">
+          <h3>长期建设</h3>
+          <p>VEA 不只是临时招人群，而是希望逐步建设成有成员体系、荣誉记录和组织文化的玩家组织。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="requirements">
+      <h2 class="section-title">加入门槛</h2>
+      <div class="grid">
+        <div class="info-box">
+          <h3>段位要求</h3>
+          <ul>
+            <li>紫水晶 1900+</li>
+            <li>具备稳定对战水平</li>
+            <li>能适应当前版本环境</li>
+          </ul>
+        </div>
+
+        <div class="info-box">
+          <h3>活跃要求</h3>
+          <ul>
+            <li>长期活跃</li>
+            <li>愿意参与组织交流</li>
+            <li>不长期潜水</li>
+          </ul>
+        </div>
+
+        <div class="info-box">
+          <h3>组织要求</h3>
+          <ul>
+            <li>尊重成员</li>
+            <li>服从基本管理安排</li>
+            <li>禁止恶意引战与破坏组织秩序</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="apply">
+      <h2 class="section-title">申请加入</h2>
+      <div class="info-box">
+        <h3>申请方式</h3>
+        <p>
+          当前官网仍在搭建中。后续这里会放置 QQ 群二维码、申请表链接、管理员联系方式和组织审核流程。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    VEA 为玩家自发组织，与 Supercell 及《皇室战争》官方无隶属关系。
+  </footer>
 </body>
 </html>
