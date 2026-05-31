@@ -324,6 +324,76 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    
+    .event-card {
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.075);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+    }
+    
+    .event-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    
+    .event-head h3 {
+      color: #facc15;
+      font-size: 21px;
+      line-height: 1.25;
+    }
+    
+    .event-head span {
+      color: #cbd5e1;
+      font-size: 14px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    
+    .event-mode {
+      color: #e5e7eb;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    
+    .podium {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    
+    .podium div {
+      padding: 10px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+    }
+    
+    .podium span {
+      display: block;
+      color: #9ca3af;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    
+    .podium strong {
+      color: #ffffff;
+      font-size: 14px;
+    }
+    
     .honor-item strong {
       color: #facc15;
     }
@@ -408,7 +478,8 @@
       }
 
       .grid,
-      .honor {
+      .honor,
+      .event-grid {
         grid-template-columns: 1fr;
       }
 
@@ -434,6 +505,7 @@
         <nav>
           <a href="#about">组织介绍</a>
           <a href="#honor">组织特色</a>
+          <a href="#events">内部赛事</a>
           <a href="#requirements">加入门槛</a>
           <a href="#apply">申请加入</a>
         </nav>
@@ -529,7 +601,63 @@
       </div>
     </section>
 
+    <section id="events">
+      <h2 class="section-title">内部赛事</h2>
+    
+      <div class="event-grid">
+        <article class="event-card">
+          <div class="event-head">
+            <h3>端午节特别赛事</h3>
+            <span>6.19 - 6.21 · 20:00-22:00</span>
+          </div>
+    
+          <p class="event-mode">模式：锦标赛 1v1 模式（五个负场）</p>
+    
+          <div class="podium">
+            <div>
+              <span>冠军</span>
+              <strong>待记录</strong>
+            </div>
+            <div>
+              <span>亚军</span>
+              <strong>待记录</strong>
+            </div>
+            <div>
+              <span>季军</span>
+              <strong>待记录</strong>
+            </div>
+          </div>
+        </article>
+    
+        <article class="event-card">
+          <div class="event-head">
+            <h3>第三届内部 KOH 练习赛</h3>
+            <span>6.11 · 20:00 开始</span>
+          </div>
+    
+          <p class="event-mode">模式：KOH 对抗赛 · 8v8 分队对决</p>
+    
+          <div class="podium">
+            <div>
+              <span>冠军</span>
+              <strong>待记录</strong>
+            </div>
+            <div>
+              <span>亚军</span>
+              <strong>待记录</strong>
+            </div>
+            <div>
+              <span>季军</span>
+              <strong>待记录</strong>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    
     <section id="requirements">
+      
       <h2 class="section-title">加入门槛</h2>
 
       <div class="grid">
