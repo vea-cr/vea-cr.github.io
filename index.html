@@ -1,4031 +1,3888 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>VEA-CR | 皇室战争国服组织</title>
-
-  <link rel="icon" type="image/png" href="logo.png">
-  <link rel="apple-touch-icon" href="logo.png">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --gold: #facc15;
-      --gold-deep: #f59e0b;
-      --purple: #a78bfa;
-      --purple-deep: #7c3aed;
-
-      --text-main: #f9fafb;
-      --text-soft: #d1d5db;
-      --text-muted: #94a3b8;
-
-      --surface: rgba(255, 255, 255, 0.065);
-      --surface-strong: rgba(255, 255, 255, 0.085);
-      --border: rgba(255, 255, 255, 0.11);
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 96px;
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
-    }
-
-    body {
-      width: 100%;
-      max-width: 100%;
-      min-height: 100vh;
-      overflow-x: hidden;
-
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        "Microsoft YaHei",
-        sans-serif;
-
-      -webkit-text-size-adjust: 100%;
-      text-size-adjust: 100%;
-
-      color: var(--text-main);
-
-      background:
-        radial-gradient(circle at 18% 8%, rgba(92, 70, 190, 0.45), transparent 32%),
-        radial-gradient(circle at 88% 12%, rgba(245, 158, 11, 0.28), transparent 34%),
-        linear-gradient(135deg, #080f1f 0%, #0d1424 45%, #070912 100%);
-    }
-
-    img {
-      max-width: 100%;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-
-      opacity: 0.28;
-
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
-
-      background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, black, transparent 82%);
-    }
-
-    /* =========================================================
-       HEADER
-    ========================================================= */
-
-    header {
-      width: 100%;
-      padding: 22px 8%;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      position: sticky;
-      top: 0;
-      z-index: 30;
-
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
-      background: rgba(7, 12, 24, 0.72);
-      backdrop-filter: blur(12px);
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VEA-CR | 皇室战争国服组织</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --gold: #facc15;
+  --gold-deep: #f59e0b;
+  --purple: #a78bfa;
+  --purple-deep: #7c3aed;
+  --text-main: #f9fafb;
+  --text-soft: #d1d5db;
+  --text-muted: #94a3b8;
+  --surface: rgba(255, 255, 255, 0.065);
+  --surface-strong: rgba(255, 255, 255, 0.085);
+  --border: rgba(255, 255, 255, 0.11);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Microsoft YaHei",
+    sans-serif;
+
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+
+  color: var(--text-main);
+
+  background:
+    radial-gradient(circle at 18% 8%, rgba(92, 70, 190, 0.45), transparent 32%),
+    radial-gradient(circle at 88% 12%, rgba(245, 158, 11, 0.28), transparent 34%),
+    linear-gradient(135deg, #080f1f 0%, #0d1424 45%, #070912 100%);
+}
+
+img {
+  max-width: 100%;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.28;
+
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+
+/* HEADER */
+
+header {
+  width: 100%;
+  padding: 22px 8%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: sticky;
+  top: 0;
+  z-index: 30;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(7, 12, 24, 0.72);
+  backdrop-filter: blur(12px);
+
+  transition:
+    padding 0.28s ease,
+    background 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+header.is-scrolled {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  background: rgba(7, 12, 24, 0.92);
+  border-bottom-color: rgba(250, 204, 21, 0.18);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 12px;
+
+  color: #111827;
+  font-weight: 950;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold),
+      var(--purple)
+    );
 
-      transition:
-        padding 0.28s ease,
-        background 0.28s ease,
-        border-color 0.28s ease,
-        box-shadow 0.28s ease;
-    }
+  box-shadow:
+    0 10px 24px rgba(250, 204, 21, 0.22);
+}
+
+.logo {
+  color: var(--gold);
+  font-size: 26px;
+  font-weight: 950;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
 
-    header.is-scrolled {
-      padding-top: 14px;
-      padding-bottom: 14px;
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  margin-left: 28px;
+  position: relative;
+
+  color: #d1d5db;
+  text-decoration: none;
 
-      background: rgba(7, 12, 24, 0.92);
+  font-size: 15px;
+  font-weight: 700;
 
-      border-bottom-color: rgba(250, 204, 21, 0.18);
+  transition: color 0.22s ease;
+}
 
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
-    }
+nav a:hover,
+nav a.active {
+  color: var(--gold);
+}
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      min-width: 0;
-    }
+nav a::after {
+  content: "";
 
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      flex-shrink: 0;
+  position: absolute;
+  left: 0;
+  bottom: -8px;
 
-      display: grid;
-      place-items: center;
+  width: 100%;
+  height: 2px;
 
-      border-radius: 12px;
+  border-radius: 999px;
 
-      color: #111827;
-      font-weight: 950;
+  background: var(--gold);
 
-      background:
-        linear-gradient(
-          135deg,
-          var(--gold),
-          var(--purple)
-        );
+  transform: scaleX(0);
+  transform-origin: left;
 
-      box-shadow:
-        0 10px 24px rgba(250, 204, 21, 0.22);
-    }
+  transition: transform 0.22s ease;
+}
 
-    .logo {
-      color: var(--gold);
+nav a:hover::after,
+nav a.active::after {
+  transform: scaleX(1);
+}
 
-      font-size: 26px;
-      font-weight: 950;
-      letter-spacing: 1px;
+.top-logo {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
 
-      white-space: nowrap;
-    }
+  object-fit: contain;
 
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
+  border-radius: 12px;
 
-    nav {
-      display: flex;
-      align-items: center;
-    }
+  filter:
+    drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
+}
 
-    nav a {
-      margin-left: 28px;
+/* GENERAL */
 
-      position: relative;
+section {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 58px 8%;
+}
 
-      color: #d1d5db;
-      text-decoration: none;
+.section-heading {
+  margin-bottom: 30px;
+}
 
-      font-size: 15px;
-      font-weight: 700;
+.section-kicker {
+  display: block;
+
+  margin-bottom: 8px;
 
-      transition: color 0.22s ease;
-    }
+  color: var(--purple);
+
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
 
-    nav a:hover,
-    nav a.active {
-      color: var(--gold);
-    }
+.section-title {
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
 
-    nav a::after {
-      content: "";
+.section-subtitle {
+  max-width: 760px;
+  margin-top: 10px;
 
-      position: absolute;
-      left: 0;
-      bottom: -8px;
+  color: #aab4c4;
 
-      width: 100%;
-      height: 2px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.8;
+}
 
-      border-radius: 999px;
+/* HERO */
 
-      background: var(--gold);
+.hero {
+  padding: 72px 8% 82px;
 
-      transform: scaleX(0);
-      transform-origin: left;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 54px;
+  align-items: center;
 
-      transition: transform 0.22s ease;
-    }
+  min-height: calc(100vh - 88px);
 
-    nav a:hover::after,
-    nav a.active::after {
-      transform: scaleX(1);
-    }
+  position: relative;
+  overflow: hidden;
+}
 
-    .top-logo {
-      width: 54px;
-      height: 54px;
-      flex-shrink: 0;
+.hero::before {
+  content: "VEIL ETHEREAL AURORA";
 
-      object-fit: contain;
+  position: absolute;
+  right: 6%;
+  top: 8%;
 
-      border-radius: 12px;
+  white-space: nowrap;
 
-      filter:
-        drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
-    }
+  color: rgba(255, 255, 255, 0.035);
 
-    /* =========================================================
-       GENERAL SECTION
-    ========================================================= */
+  font-size: clamp(28px, 5vw, 78px);
+  font-weight: 950;
+  letter-spacing: 8px;
 
-    section {
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
+  pointer-events: none;
+  user-select: none;
+}
 
-      padding: 58px 8%;
-    }
+.hero::after {
+  content: "";
 
-    .section-heading {
-      margin-bottom: 30px;
-    }
+  position: absolute;
+  inset: 0;
 
-    .section-kicker {
-      display: block;
+  pointer-events: none;
 
-      margin-bottom: 8px;
+  background:
+    radial-gradient(
+      circle at 18% 22%,
+      rgba(124, 58, 237, 0.18),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 82% 28%,
+      rgba(250, 204, 21, 0.12),
+      transparent 30%
+    );
+}
 
-      color: var(--purple);
+.hero-copy,
+.visual {
+  position: relative;
+  z-index: 1;
 
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
+  min-width: 0;
+  max-width: 100%;
+}
 
-    .section-title {
-      font-size: 38px;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
+.hero-copy > * {
+  max-width: 100%;
+}
 
-    .section-subtitle {
-      max-width: 760px;
+.cr-logo {
+  width: min(420px, 78vw);
+  margin-bottom: 26px;
 
-      margin-top: 10px;
+  filter:
+    drop-shadow(0 18px 26px rgba(0, 0, 0, 0.45));
+}
 
-      color: #aab4c4;
+.tag {
+  display: inline-block;
 
-      font-size: 15px;
-      font-weight: 600;
-      line-height: 1.8;
-    }
+  padding: 8px 14px;
+  margin-bottom: 22px;
 
-    /* =========================================================
-       HERO
-    ========================================================= */
+  border:
+    1px solid rgba(250, 204, 21, 0.48);
 
-    .hero {
-      padding: 72px 8% 82px;
+  border-radius: 999px;
 
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 54px;
-      align-items: center;
+  color: var(--gold);
 
-      min-height: calc(100vh - 88px);
+  background:
+    rgba(250, 204, 21, 0.08);
 
-      position: relative;
-      overflow: hidden;
-    }
+  font-size: 14px;
+  font-weight: 800;
+}
 
-    .hero::before {
-      content: "VEIL ETHEREAL AURORA";
+h1 {
+  margin-bottom: 24px;
 
-      position: absolute;
-      right: 6%;
-      top: 8%;
+  font-size: clamp(54px, 8vw, 104px);
+  font-weight: 950;
+  letter-spacing: -2px;
+  line-height: 0.92;
+}
 
-      white-space: nowrap;
+.highlight {
+  color: var(--purple);
 
-      color: rgba(255, 255, 255, 0.035);
+  text-shadow:
+    0 0 28px rgba(167, 139, 250, 0.28);
+}
 
-      font-size: clamp(28px, 5vw, 78px);
-      font-weight: 950;
-      letter-spacing: 8px;
+.subtitle {
+  width: 100%;
+  max-width: 700px;
 
-      pointer-events: none;
-      user-select: none;
-    }
+  margin-bottom: 34px;
 
-    .hero::after {
-      content: "";
+  color: var(--text-soft);
 
-      position: absolute;
-      inset: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.85;
 
-      pointer-events: none;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
 
-      background:
-        radial-gradient(
-          circle at 18% 22%,
-          rgba(124, 58, 237, 0.18),
-          transparent 27%
-        ),
-        radial-gradient(
-          circle at 82% 28%,
-          rgba(250, 204, 21, 0.12),
-          transparent 30%
-        );
-    }
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
 
-    .hero-copy,
-    .visual {
-      position: relative;
-      z-index: 1;
+  margin-bottom: 32px;
+}
 
-      min-width: 0;
-      max-width: 100%;
-    }
+.btn {
+  min-width: 140px;
 
-    .hero-copy > * {
-      max-width: 100%;
-    }
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-    .cr-logo {
-      width: min(420px, 78vw);
+  padding: 15px 24px;
 
-      margin-bottom: 26px;
+  border-radius: 15px;
 
-      filter:
-        drop-shadow(0 18px 26px rgba(0, 0, 0, 0.45));
-    }
+  text-align: center;
+  text-decoration: none;
 
-    .tag {
-      display: inline-block;
+  font-weight: 900;
 
-      padding: 8px 14px;
-      margin-bottom: 22px;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease;
+}
 
-      border:
-        1px solid rgba(250, 204, 21, 0.48);
+.btn-primary {
+  color: #111827;
 
-      border-radius: 999px;
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold),
+      var(--gold-deep)
+    );
 
-      color: var(--gold);
+  box-shadow:
+    0 14px 30px rgba(245, 158, 11, 0.28);
+}
 
-      background:
-        rgba(250, 204, 21, 0.08);
+.btn-primary:hover {
+  transform: translateY(-3px);
 
-      font-size: 14px;
-      font-weight: 800;
-    }
+  box-shadow:
+    0 20px 36px rgba(245, 158, 11, 0.36);
+}
 
-    h1 {
-      margin-bottom: 24px;
+.btn-secondary {
+  color: #f9fafb;
 
-      font-size: clamp(54px, 8vw, 104px);
-      font-weight: 950;
-      letter-spacing: -2px;
-      line-height: 0.92;
-    }
+  border:
+    1px solid rgba(255, 255, 255, 0.22);
 
-    .highlight {
-      color: var(--purple);
+  background:
+    rgba(255, 255, 255, 0.07);
+}
 
-      text-shadow:
-        0 0 28px rgba(167, 139, 250, 0.28);
-    }
+.btn-secondary:hover {
+  transform: translateY(-3px);
 
-    .subtitle {
-      width: 100%;
-      max-width: 700px;
+  background:
+    rgba(255, 255, 255, 0.12);
 
-      margin-bottom: 34px;
+  border-color:
+    rgba(250, 204, 21, 0.45);
+}
 
-      color: var(--text-soft);
+.quick-stats {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  gap: 16px;
+}
 
-      font-size: 20px;
-      font-weight: 600;
-      line-height: 1.85;
+.stat-pill {
+  padding: 12px 16px;
 
-      overflow-wrap: anywhere;
-      word-break: normal;
-    }
+  border-radius: 999px;
 
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
+  background:
+    rgba(255, 255, 255, 0.07);
 
-      margin-bottom: 32px;
-    }
+  border:
+    1px solid rgba(255, 255, 255, 0.11);
 
-    .btn {
-      min-width: 140px;
+  color: #e5e7eb;
 
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+  font-weight: 800;
 
-      padding: 15px 24px;
+  transition:
+    transform 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease;
+}
 
-      border-radius: 15px;
+/* HERO VISUAL */
 
-      text-align: center;
-      text-decoration: none;
+.visual {
+  min-height: 640px;
 
-      font-weight: 900;
+  display: grid;
+  place-items: center;
 
-      transition:
-        transform 0.22s ease,
-        box-shadow 0.22s ease,
-        background 0.22s ease,
-        border-color 0.22s ease;
-    }
+  isolation: isolate;
+}
 
-    .btn-primary {
-      color: #111827;
+.visual::before {
+  content: "";
 
-      background:
-        linear-gradient(
-          135deg,
-          var(--gold),
-          var(--gold-deep)
-        );
+  position: absolute;
 
-      box-shadow:
-        0 14px 30px rgba(245, 158, 11, 0.28);
-    }
+  width: min(520px, 78vw);
+  aspect-ratio: 1;
 
-    .btn-primary:hover {
-      transform: translateY(-3px);
+  border-radius: 50%;
 
-      box-shadow:
-        0 20px 36px rgba(245, 158, 11, 0.36);
-    }
+  border:
+    1px solid rgba(167, 139, 250, 0.26);
 
-    .btn-secondary {
-      color: #f9fafb;
+  box-shadow:
+    inset 0 0 70px rgba(167, 139, 250, 0.12),
+    0 0 90px rgba(167, 139, 250, 0.12);
 
-      border:
-        1px solid rgba(255, 255, 255, 0.22);
+  transform: translateY(-8px);
 
-      background:
-        rgba(255, 255, 255, 0.07);
-    }
+  pointer-events: none;
 
-    .btn-secondary:hover {
-      transform: translateY(-3px);
+  animation:
+    halo-breathe 5.5s ease-in-out infinite;
+}
 
-      background:
-        rgba(255, 255, 255, 0.12);
+.visual::after {
+  content: "";
 
-      border-color:
-        rgba(250, 204, 21, 0.45);
-    }
+  position: absolute;
 
-    .quick-stats {
-      display: grid;
-      grid-template-columns: repeat(3, max-content);
-      gap: 16px;
-    }
+  width: min(420px, 66vw);
+  height: 78%;
 
-    .stat-pill {
-      padding: 12px 16px;
+  border-radius: 50%;
 
-      border-radius: 999px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(250, 204, 21, 0.18),
+      transparent 68%
+    );
 
-      background:
-        rgba(255, 255, 255, 0.07);
+  filter: blur(10px);
 
-      border:
-        1px solid rgba(255, 255, 255, 0.11);
+  pointer-events: none;
 
-      color: #e5e7eb;
+  animation:
+    glow-drift 8s ease-in-out infinite alternate;
+}
 
-      font-weight: 800;
+.arena-ring {
+  position: absolute;
 
-      transition:
-        transform 0.22s ease,
-        background 0.22s ease,
-        border-color 0.22s ease;
-    }
+  width: min(590px, 92vw);
+  aspect-ratio: 1;
 
-    /* =========================================================
-       HERO VISUAL
-    ========================================================= */
+  border-radius: 50%;
 
-    .visual {
-      min-height: 640px;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255,255,255,0.06) 0 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle,
+      transparent 48%,
+      rgba(250, 204, 21, 0.15) 49%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle,
+      transparent 60%,
+      rgba(167, 139, 250, 0.12) 61%,
+      transparent 62%
+    );
 
-      display: grid;
-      place-items: center;
+  background-size:
+    22px 22px,
+    100% 100%,
+    100% 100%;
 
-      isolation: isolate;
-    }
+  opacity: 0.34;
 
-    .visual::before {
-      content: "";
+  pointer-events: none;
 
-      position: absolute;
+  animation:
+    arena-spin 18s linear infinite;
+}
 
-      width: min(520px, 78vw);
-      aspect-ratio: 1;
+.hero-aurora {
+  position: absolute;
 
-      border-radius: 50%;
+  width: min(560px, 90vw);
+  height: min(560px, 90vw);
 
-      border:
-        1px solid rgba(167, 139, 250, 0.26);
+  border-radius: 50%;
 
-      box-shadow:
-        inset 0 0 70px rgba(167, 139, 250, 0.12),
-        0 0 90px rgba(167, 139, 250, 0.12);
+  background:
+    radial-gradient(
+      circle at 45% 50%,
+      rgba(245, 158, 11, 0.18),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 58% 42%,
+      rgba(250, 204, 21, 0.14),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 46% 66%,
+      rgba(124, 58, 237, 0.16),
+      transparent 40%
+    );
 
-      transform: translateY(-8px);
+  filter: blur(18px);
 
-      pointer-events: none;
+  pointer-events: none;
 
-      animation:
-        halo-breathe 5.5s ease-in-out infinite;
-    }
+  animation:
+    aurora-pulse 7.5s ease-in-out infinite;
+}
 
-    .visual::after {
-      content: "";
+.light-beam {
+  position: absolute;
 
-      position: absolute;
+  width: 240px;
+  height: 500px;
 
-      width: min(420px, 66vw);
-      height: 78%;
+  border-radius: 999px;
 
-      border-radius: 50%;
+  opacity: 0.24;
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(250, 204, 21, 0.18),
-          transparent 68%
-        );
+  background:
+    linear-gradient(
+      180deg,
+      rgba(250, 204, 21, 0.08),
+      rgba(250, 204, 21, 0.28),
+      rgba(167, 139, 250, 0.08)
+    );
 
-      filter: blur(10px);
+  filter: blur(8px);
 
-      pointer-events: none;
+  pointer-events: none;
 
-      animation:
-        glow-drift 8s ease-in-out infinite alternate;
-    }
+  animation:
+    beam-sway 7.5s ease-in-out infinite alternate;
+}
 
-    .arena-ring {
-      position: absolute;
+.visual-particles {
+  position: absolute;
+  inset: 0;
 
-      width: min(590px, 92vw);
-      aspect-ratio: 1;
+  pointer-events: none;
 
-      border-radius: 50%;
+  z-index: 1;
+}
 
-      background:
-        radial-gradient(
-          circle at center,
-          rgba(255,255,255,0.06) 0 1px,
-          transparent 1px
-        ),
-        radial-gradient(
-          circle,
-          transparent 48%,
-          rgba(250, 204, 21, 0.15) 49%,
-          transparent 50%
-        ),
-        radial-gradient(
-          circle,
-          transparent 60%,
-          rgba(167, 139, 250, 0.12) 61%,
-          transparent 62%
-        );
+.particle {
+  position: absolute;
 
-      background-size:
-        22px 22px,
-        100% 100%,
-        100% 100%;
+  border-radius: 50%;
 
-      opacity: 0.34;
+  animation:
+    particle-float var(--dur, 7s)
+    ease-in-out infinite;
 
-      pointer-events: none;
+  animation-delay:
+    var(--delay, 0s);
+}
 
-      animation:
-        arena-spin 18s linear infinite;
-    }
+.particle.gold {
+  background:
+    rgba(250, 204, 21, 0.92);
 
-    .hero-aurora {
-      position: absolute;
+  box-shadow:
+    0 0 16px rgba(250, 204, 21, 0.4);
+}
 
-      width: min(560px, 90vw);
-      height: min(560px, 90vw);
+.particle.purple {
+  background:
+    rgba(192, 132, 252, 0.92);
 
-      border-radius: 50%;
+  box-shadow:
+    0 0 16px rgba(192, 132, 252, 0.36);
+}
 
-      background:
-        radial-gradient(
-          circle at 45% 50%,
-          rgba(245, 158, 11, 0.18),
-          transparent 28%
-        ),
-        radial-gradient(
-          circle at 58% 42%,
-          rgba(250, 204, 21, 0.14),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 46% 66%,
-          rgba(124, 58, 237, 0.16),
-          transparent 40%
-        );
+.particle.soft {
+  background:
+    rgba(255, 255, 255, 0.72);
 
-      filter: blur(18px);
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.18);
+}
 
-      pointer-events: none;
+.hero-character-wrap {
+  position: relative;
 
-      animation:
-        aurora-pulse 7.5s ease-in-out infinite;
-    }
+  z-index: 2;
 
-    .light-beam {
-      position: absolute;
+  transition: transform 0.22s ease;
+}
 
-      width: 240px;
-      height: 500px;
+.hero-character {
+  width: min(610px, 96vw);
+  max-height: 650px;
 
-      border-radius: 999px;
+  object-fit: contain;
 
-      opacity: 0.24;
+  display: block;
 
-      background:
-        linear-gradient(
-          180deg,
-          rgba(250, 204, 21, 0.08),
-          rgba(250, 204, 21, 0.28),
-          rgba(167, 139, 250, 0.08)
-        );
+  filter:
+    drop-shadow(
+      0 38px 58px rgba(0, 0, 0, 0.68)
+    );
 
-      filter: blur(8px);
+  animation:
+    character-float 5.8s
+    ease-in-out infinite;
+}
 
-      pointer-events: none;
+/* RANK CARD */
 
-      animation:
-        beam-sway 7.5s ease-in-out infinite alternate;
-    }
+.rank-card {
+  position: absolute;
 
-    .visual-particles {
-      position: absolute;
-      inset: 0;
+  right: 0;
+  bottom: 4%;
 
-      pointer-events: none;
+  width: 286px;
 
-      z-index: 1;
-    }
+  padding: 17px;
 
-    .particle {
-      position: absolute;
+  border-radius: 23px;
 
-      border-radius: 50%;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(250, 204, 21, 0.11),
+      rgba(167, 139, 250, 0.11)
+    ),
+    rgba(16, 24, 40, 0.62);
 
-      animation:
-        particle-float var(--dur, 7s)
-        ease-in-out infinite;
+  border:
+    1px solid rgba(255, 255, 255, 0.13);
 
-      animation-delay:
-        var(--delay, 0s);
-    }
+  box-shadow:
+    0 26px 70px rgba(0, 0, 0, 0.36);
 
-    .particle.gold {
-      background:
-        rgba(250, 204, 21, 0.92);
+  backdrop-filter: blur(14px);
 
-      box-shadow:
-        0 0 16px rgba(250, 204, 21, 0.4);
-    }
+  z-index: 3;
 
-    .particle.purple {
-      background:
-        rgba(192, 132, 252, 0.92);
+  overflow: hidden;
 
-      box-shadow:
-        0 0 16px rgba(192, 132, 252, 0.36);
-    }
+  animation:
+    card-float 6.2s
+    ease-in-out infinite 0.45s;
 
-    .particle.soft {
-      background:
-        rgba(255, 255, 255, 0.72);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
 
-      box-shadow:
-        0 0 12px rgba(255, 255, 255, 0.18);
-    }
+.rank-card::before {
+  content: "";
 
-    .hero-character-wrap {
-      position: relative;
+  position: absolute;
+  inset: 0;
 
-      z-index: 2;
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255,255,255,0.08),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(250, 204, 21, 0.16),
+      transparent 34%
+    );
 
-      transition: transform 0.22s ease;
-    }
+  pointer-events: none;
+}
 
-    .hero-character {
-      width: min(610px, 96vw);
-      max-height: 650px;
+.rank-frame {
+  position: relative;
 
-      object-fit: contain;
+  z-index: 1;
 
-      display: block;
+  padding: 13px;
 
-      filter:
-        drop-shadow(
-          0 38px 58px rgba(0, 0, 0, 0.68)
-        );
+  border-radius: 17px;
 
-      animation:
-        character-float 5.8s
-        ease-in-out infinite;
-    }
+  background:
+    rgba(255, 255, 255, 0.035);
 
-    /* =========================================================
-       RANK CARD
-    ========================================================= */
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+}
 
-    .rank-card {
-      position: absolute;
+.rank-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 9px;
 
-      right: 0;
-      bottom: 4%;
+  margin-bottom: 12px;
+}
 
-      width: 286px;
+.rank-badge {
+  min-width: 0;
 
-      padding: 17px;
+  padding: 7px 10px;
 
-      border-radius: 23px;
+  border-radius: 999px;
 
-      background:
-        linear-gradient(
-          135deg,
-          rgba(250, 204, 21, 0.11),
-          rgba(167, 139, 250, 0.11)
-        ),
-        rgba(16, 24, 40, 0.62);
+  background:
+    rgba(255, 255, 255, 0.08);
 
-      border:
-        1px solid rgba(255, 255, 255, 0.13);
+  border:
+    1px solid rgba(255, 255, 255, 0.13);
 
-      box-shadow:
-        0 26px 70px rgba(0, 0, 0, 0.36);
+  color: var(--gold);
 
-      backdrop-filter: blur(14px);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.35px;
 
-      z-index: 3;
+  line-height: 1.3;
+}
 
-      overflow: hidden;
+.rank-emblem {
+  width: 36px;
+  height: 36px;
 
-      animation:
-        card-float 6.2s
-        ease-in-out infinite 0.45s;
+  flex-shrink: 0;
 
-      transition:
-        transform 0.22s ease,
-        box-shadow 0.22s ease,
-        border-color 0.22s ease;
-    }
+  display: grid;
+  place-items: center;
 
-    .rank-card::before {
-      content: "";
+  padding: 5px;
 
-      position: absolute;
-      inset: 0;
+  border-radius: 11px;
 
-      background:
-        linear-gradient(
-          120deg,
-          rgba(255,255,255,0.08),
-          transparent 35%
-        ),
-        radial-gradient(
-          circle at top right,
-          rgba(250, 204, 21, 0.16),
-          transparent 34%
-        );
+  background:
+    linear-gradient(
+      135deg,
+      rgba(250, 204, 21, 0.2),
+      rgba(167, 139, 250, 0.2)
+    );
 
-      pointer-events: none;
-    }
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+}
 
-    .rank-frame {
-      position: relative;
+.rank-emblem img {
+  width: 100%;
+  height: 100%;
 
-      z-index: 1;
+  object-fit: contain;
 
-      padding: 13px;
+  border-radius: 7px;
+}
 
-      border-radius: 17px;
+.rank-title {
+  margin-bottom: 7px;
 
-      background:
-        rgba(255, 255, 255, 0.035);
+  color: #cbd5e1;
 
-      border:
-        1px solid rgba(255, 255, 255, 0.08);
-    }
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
 
-    .rank-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 9px;
+  text-transform: uppercase;
+}
 
-      margin-bottom: 12px;
-    }
+.number {
+  margin-bottom: 8px;
 
-    .rank-badge {
-      min-width: 0;
+  color: #fff;
 
-      padding: 7px 10px;
+  font-size: 38px;
+  font-weight: 950;
+  letter-spacing: -1.4px;
+  line-height: 0.98;
 
-      border-radius: 999px;
+  overflow-wrap: anywhere;
+}
 
-      background:
-        rgba(255, 255, 255, 0.08);
+.rank-sub {
+  margin-bottom: 12px;
 
-      border:
-        1px solid rgba(255, 255, 255, 0.13);
+  color: var(--purple);
 
-      color: var(--gold);
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.35;
+}
 
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 0.35px;
+.rank-desc {
+  margin-bottom: 12px;
 
-      line-height: 1.3;
-    }
+  color: #d1d5db;
 
-    .rank-emblem {
-      width: 36px;
-      height: 36px;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.68;
+}
 
-      flex-shrink: 0;
+.rank-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
 
-      display: grid;
-      place-items: center;
+.rank-tags span {
+  padding: 7px 9px;
 
-      padding: 5px;
+  border-radius: 999px;
 
-      border-radius: 11px;
+  background:
+    rgba(255, 255, 255, 0.075);
 
-      background:
-        linear-gradient(
-          135deg,
-          rgba(250, 204, 21, 0.2),
-          rgba(167, 139, 250, 0.2)
-        );
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
 
-      border:
-        1px solid rgba(255, 255, 255, 0.1);
-    }
+  color: #e5e7eb;
 
-    .rank-emblem img {
-      width: 100%;
-      height: 100%;
+  font-size: 10px;
+  font-weight: 800;
+}
 
-      object-fit: contain;
+/* SLOGAN */
 
-      border-radius: 7px;
-    }
+.slogan-band {
+  position: relative;
 
-    .rank-title {
-      margin-bottom: 7px;
+  padding: 88px 8%;
 
-      color: #cbd5e1;
+  overflow: hidden;
 
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 1.3px;
+  text-align: center;
 
-      text-transform: uppercase;
-    }
+  background:
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(124, 58, 237, 0.13),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 80% 40%,
+      rgba(250, 204, 21, 0.10),
+      transparent 24%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(8, 12, 22, 0.76),
+      rgba(7, 9, 18, 0.88)
+    );
 
-    .number {
-      margin-bottom: 8px;
+  border-top:
+    1px solid rgba(255,255,255,0.05);
 
-      color: #fff;
+  border-bottom:
+    1px solid rgba(255,255,255,0.05);
+}
 
-      font-size: 38px;
-      font-weight: 950;
-      letter-spacing: -1.4px;
-      line-height: 0.98;
+.slogan-band::before {
+  content: "VEA";
 
-      overflow-wrap: anywhere;
-    }
+  position: absolute;
+  left: 50%;
+  top: 50%;
 
-    .rank-sub {
-      margin-bottom: 12px;
+  transform:
+    translate(-50%, -50%);
 
-      color: var(--purple);
+  color:
+    rgba(255,255,255,0.03);
 
-      font-size: 13px;
-      font-weight: 900;
-      line-height: 1.35;
-    }
+  font-size:
+    clamp(130px, 22vw, 330px);
 
-    .rank-desc {
-      margin-bottom: 12px;
+  font-weight: 950;
+  letter-spacing: 12px;
 
-      color: #d1d5db;
+  pointer-events: none;
+}
 
-      font-size: 12.5px;
-      font-weight: 600;
-      line-height: 1.68;
-    }
+.slogan-inner {
+  position: relative;
 
-    .rank-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
+  max-width: 1000px;
 
-    .rank-tags span {
-      padding: 7px 9px;
+  margin: 0 auto;
 
-      border-radius: 999px;
+  z-index: 1;
+}
 
-      background:
-        rgba(255, 255, 255, 0.075);
+.slogan-overline {
+  display: inline-block;
 
-      border:
-        1px solid rgba(255, 255, 255, 0.09);
+  margin-bottom: 18px;
 
-      color: #e5e7eb;
+  color: #aab4c4;
 
-      font-size: 10px;
-      font-weight: 800;
-    }
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 3px;
 
-    /* =========================================================
-       SLOGAN
-    ========================================================= */
+  text-transform: uppercase;
+}
 
-    .slogan-band {
-      position: relative;
+.slogan-main {
+  margin-bottom: 20px;
 
-      padding: 88px 8%;
+  font-size:
+    clamp(36px, 5vw, 72px);
 
-      overflow: hidden;
+  font-weight: 950;
+  letter-spacing: -1.5px;
+  line-height: 1.08;
+}
 
-      text-align: center;
+.slogan-main span {
+  color: var(--purple);
+}
 
-      background:
-        radial-gradient(
-          circle at 20% 50%,
-          rgba(124, 58, 237, 0.13),
-          transparent 26%
-        ),
-        radial-gradient(
-          circle at 80% 40%,
-          rgba(250, 204, 21, 0.10),
-          transparent 24%
-        ),
-        linear-gradient(
-          180deg,
-          rgba(8, 12, 22, 0.76),
-          rgba(7, 9, 18, 0.88)
-        );
+.slogan-divider {
+  width: min(240px, 55vw);
+  height: 1px;
 
-      border-top:
-        1px solid rgba(255,255,255,0.05);
+  margin: 0 auto 16px;
 
-      border-bottom:
-        1px solid rgba(255,255,255,0.05);
-    }
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--gold),
+      transparent
+    );
 
-    .slogan-band::before {
-      content: "VEA";
+  box-shadow:
+    0 0 16px rgba(250, 204, 21, 0.32);
+}
 
-      position: absolute;
-      left: 50%;
-      top: 50%;
+.slogan-note {
+  color: #94a3b8;
 
-      transform:
-        translate(-50%, -50%);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 2px;
 
-      color:
-        rgba(255,255,255,0.03);
+  text-transform: uppercase;
+}
 
-      font-size:
-        clamp(130px, 22vw, 330px);
+/* ABOUT */
 
-      font-weight: 950;
-      letter-spacing: 12px;
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
 
-      pointer-events: none;
-    }
+.about-card {
+  min-height: 390px;
 
-    .slogan-inner {
-      position: relative;
+  padding: 24px;
 
-      max-width: 1000px;
+  position: relative;
 
-      margin: 0 auto;
+  overflow: hidden;
 
-      z-index: 1;
-    }
+  border-radius: 26px;
 
-    .slogan-overline {
-      display: inline-block;
+  border:
+    1px solid rgba(255,255,255,0.1);
 
-      margin-bottom: 18px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.07),
+      rgba(255,255,255,0.035)
+    );
 
-      color: #aab4c4;
+  box-shadow:
+    0 22px 50px rgba(0,0,0,0.16);
 
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 3px;
+  transition:
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+}
 
-      text-transform: uppercase;
-    }
+.about-card::before {
+  content: "";
 
-    .slogan-main {
-      margin-bottom: 20px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
 
-      font-size:
-        clamp(36px, 5vw, 72px);
+  height: 2px;
 
-      font-weight: 950;
-      letter-spacing: -1.5px;
-      line-height: 1.08;
-    }
+  opacity: 0.8;
 
-    .slogan-main span {
-      color: var(--purple);
-    }
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--gold),
+      var(--purple),
+      transparent
+    );
+}
 
-    .slogan-divider {
-      width: min(240px, 55vw);
-      height: 1px;
+.about-card::after {
+  content: "";
 
-      margin: 0 auto 16px;
+  position: absolute;
 
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          var(--gold),
-          transparent
-        );
+  width: 240px;
+  height: 240px;
 
-      box-shadow:
-        0 0 16px rgba(250, 204, 21, 0.32);
-    }
+  right: -100px;
+  top: -100px;
 
-    .slogan-note {
-      color: #94a3b8;
+  border-radius: 50%;
 
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 2px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(167, 139, 250, 0.11),
+      transparent 68%
+    );
 
-      text-transform: uppercase;
-    }
+  pointer-events: none;
+}
 
-    /* =========================================================
-       ABOUT
-    ========================================================= */
+.about-index {
+  position: absolute;
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
+  right: 20px;
+  top: 14px;
 
-    .about-card {
-      min-height: 390px;
+  color:
+    rgba(255,255,255,0.055);
 
-      padding: 24px;
+  font-size: 62px;
+  font-weight: 950;
+  line-height: 1;
+}
 
-      position: relative;
+.about-image-stage {
+  height: 200px;
 
-      overflow: hidden;
+  margin-bottom: 18px;
 
-      border-radius: 26px;
+  display: grid;
+  place-items: center;
 
-      border:
-        1px solid rgba(255,255,255,0.1);
+  position: relative;
+}
 
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,0.07),
-          rgba(255,255,255,0.035)
-        );
+.about-image-stage::before {
+  content: "";
 
-      box-shadow:
-        0 22px 50px rgba(0,0,0,0.16);
+  position: absolute;
 
-      transition:
-        transform 0.28s ease,
-        border-color 0.28s ease,
-        box-shadow 0.28s ease;
-    }
+  width: 170px;
+  height: 170px;
 
-    .about-card::before {
-      content: "";
+  border-radius: 50%;
 
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
+  background:
+    radial-gradient(
+      circle,
+      rgba(250,204,21,0.11),
+      rgba(167,139,250,0.05) 42%,
+      transparent 68%
+    );
 
-      height: 2px;
+  filter: blur(2px);
+}
 
-      opacity: 0.8;
+.about-image-stage::after {
+  content: "";
 
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          var(--gold),
-          var(--purple),
-          transparent
-        );
-    }
+  position: absolute;
 
-    .about-card::after {
-      content: "";
+  width: 140px;
+  height: 140px;
 
-      position: absolute;
+  border-radius: 50%;
 
-      width: 240px;
-      height: 240px;
+  border:
+    1px solid rgba(255,255,255,0.06);
+}
 
-      right: -100px;
-      top: -100px;
+.about-image-stage img {
+  max-width: 200px;
+  max-height: 180px;
 
-      border-radius: 50%;
+  object-fit: contain;
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(167, 139, 250, 0.11),
-          transparent 68%
-        );
+  position: relative;
 
-      pointer-events: none;
-    }
+  z-index: 1;
 
-    .about-index {
-      position: absolute;
+  filter:
+    drop-shadow(
+      0 22px 28px rgba(0,0,0,0.5)
+    );
+}
 
-      right: 20px;
-      top: 14px;
+.about-chip {
+  display: inline-block;
 
-      color:
-        rgba(255,255,255,0.055);
+  margin-bottom: 10px;
+  padding: 6px 9px;
 
-      font-size: 62px;
-      font-weight: 950;
-      line-height: 1;
-    }
+  border-radius: 999px;
 
-    .about-image-stage {
-      height: 200px;
+  color: var(--purple);
 
-      margin-bottom: 18px;
+  background:
+    rgba(167,139,250,0.08);
 
-      display: grid;
-      place-items: center;
+  border:
+    1px solid rgba(167,139,250,0.13);
 
-      position: relative;
-    }
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
 
-    .about-image-stage::before {
-      content: "";
+.about-card h3 {
+  margin-bottom: 10px;
 
-      position: absolute;
+  color: var(--gold);
 
-      width: 170px;
-      height: 170px;
+  font-size: 21px;
+}
 
-      border-radius: 50%;
+.about-card p {
+  color: #cbd5e1;
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(250,204,21,0.11),
-          rgba(167,139,250,0.05) 42%,
-          transparent 68%
-        );
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.78;
+}
 
-      filter: blur(2px);
-    }
+/* FEATURES */
 
-    .about-image-stage::after {
-      content: "";
+.feature-panel {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: 34px;
+  align-items: stretch;
 
-      position: absolute;
+  padding: 36px;
 
-      width: 140px;
-      height: 140px;
+  position: relative;
 
-      border-radius: 50%;
+  overflow: hidden;
 
-      border:
-        1px solid rgba(255,255,255,0.06);
-    }
+  border-radius: 30px;
 
-    .about-image-stage img {
-      max-width: 200px;
-      max-height: 180px;
+  border:
+    1px solid rgba(167,139,250,0.2);
 
-      object-fit: contain;
+  background:
+    radial-gradient(
+      circle at 18% 20%,
+      rgba(250,204,21,0.11),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 85% 65%,
+      rgba(124,58,237,0.12),
+      transparent 28%
+    ),
+    rgba(255,255,255,0.052);
 
-      position: relative;
+  box-shadow:
+    0 24px 60px rgba(0,0,0,0.2);
+}
 
-      z-index: 1;
+.feature-panel::before {
+  content: "VEA";
 
-      filter:
-        drop-shadow(
-          0 22px 28px rgba(0,0,0,0.5)
-        );
-    }
+  position: absolute;
 
-    .about-chip {
-      display: inline-block;
+  left: -22px;
+  bottom: -48px;
 
-      margin-bottom: 10px;
-      padding: 6px 9px;
+  color:
+    rgba(255,255,255,0.025);
 
-      border-radius: 999px;
+  font-size: 180px;
+  font-weight: 950;
 
-      color: var(--purple);
+  pointer-events: none;
+}
 
-      background:
-        rgba(167,139,250,0.08);
+.feature-visual {
+  min-height: 340px;
 
-      border:
-        1px solid rgba(167,139,250,0.13);
+  display: grid;
+  place-items: center;
 
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 1px;
-    }
+  position: relative;
+}
 
-    .about-card h3 {
-      margin-bottom: 10px;
+.feature-visual::before {
+  content: "";
 
-      color: var(--gold);
+  position: absolute;
 
-      font-size: 21px;
-    }
+  width: 260px;
+  height: 260px;
 
-    .about-card p {
-      color: #cbd5e1;
+  border-radius: 50%;
 
-      font-size: 14.5px;
-      font-weight: 600;
-      line-height: 1.78;
-    }
+  border:
+    1px solid rgba(167,139,250,0.22);
 
-    /* =========================================================
-       FEATURES
-    ========================================================= */
+  box-shadow:
+    inset 0 0 55px rgba(167,139,250,0.08),
+    0 0 50px rgba(167,139,250,0.05);
+}
 
-    .feature-panel {
-      display: grid;
-      grid-template-columns: 0.82fr 1.18fr;
-      gap: 34px;
-      align-items: stretch;
+.feature-visual::after {
+  content: "";
 
-      padding: 36px;
+  position: absolute;
 
-      position: relative;
+  width: 190px;
+  height: 190px;
 
-      overflow: hidden;
+  border-radius: 50%;
 
-      border-radius: 30px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(167,139,250,0.16),
+      transparent 68%
+    );
+}
 
-      border:
-        1px solid rgba(167,139,250,0.2);
+.feature-visual img {
+  width: min(300px, 80%);
 
-      background:
-        radial-gradient(
-          circle at 18% 20%,
-          rgba(250,204,21,0.11),
-          transparent 26%
-        ),
-        radial-gradient(
-          circle at 85% 65%,
-          rgba(124,58,237,0.12),
-          transparent 28%
-        ),
-        rgba(255,255,255,0.052);
+  position: relative;
 
-      box-shadow:
-        0 24px 60px rgba(0,0,0,0.2);
-    }
+  z-index: 1;
 
-    .feature-panel::before {
-      content: "VEA";
+  filter:
+    drop-shadow(
+      0 28px 42px rgba(0,0,0,0.58)
+    );
+}
 
-      position: absolute;
+.feature-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-      left: -22px;
-      bottom: -48px;
+  position: relative;
 
-      color:
-        rgba(255,255,255,0.025);
+  z-index: 1;
+}
 
-      font-size: 180px;
-      font-weight: 950;
+.feature-small-title {
+  margin-bottom: 18px;
 
-      pointer-events: none;
-    }
+  color: #9ca3af;
 
-    .feature-visual {
-      min-height: 340px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
 
-      display: grid;
-      place-items: center;
+  text-transform: uppercase;
+}
 
-      position: relative;
-    }
+.feature-list {
+  display: grid;
+  gap: 13px;
+}
 
-    .feature-visual::before {
-      content: "";
+.feature-item {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 15px;
+  align-items: center;
 
-      position: absolute;
+  padding: 16px 18px;
 
-      width: 260px;
-      height: 260px;
+  border-radius: 18px;
 
-      border-radius: 50%;
+  background:
+    rgba(255,255,255,0.065);
 
-      border:
-        1px solid rgba(167,139,250,0.22);
+  border:
+    1px solid rgba(255,255,255,0.09);
 
-      box-shadow:
-        inset 0 0 55px rgba(167,139,250,0.08),
-        0 0 50px rgba(167,139,250,0.05);
-    }
+  transition:
+    transform 0.24s ease,
+    background 0.24s ease,
+    border-color 0.24s ease;
+}
 
-    .feature-visual::after {
-      content: "";
+.feature-item-index {
+  width: 44px;
+  height: 44px;
 
-      position: absolute;
+  display: grid;
+  place-items: center;
 
-      width: 190px;
-      height: 190px;
+  border-radius: 14px;
 
-      border-radius: 50%;
+  color: #111827;
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(167,139,250,0.16),
-          transparent 68%
-        );
-    }
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold),
+      var(--purple)
+    );
 
-    .feature-visual img {
-      width: min(300px, 80%);
+  font-size: 13px;
+  font-weight: 950;
+}
 
-      position: relative;
+.feature-item strong {
+  display: block;
 
-      z-index: 1;
+  margin-bottom: 4px;
 
-      filter:
-        drop-shadow(
-          0 28px 42px rgba(0,0,0,0.58)
-        );
-    }
+  color: var(--gold);
 
-    .feature-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+  font-size: 15px;
+}
 
-      position: relative;
+.feature-item p {
+  color: #cbd5e1;
 
-      z-index: 1;
-    }
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.65;
+}
 
-    .feature-small-title {
-      margin-bottom: 18px;
+/* EVENTS */
 
-      color: #9ca3af;
+.event-shell {
+  position: relative;
+  padding: 34px;
+  border-radius: 30px;
 
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 2px;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(250, 204, 21, 0.12),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(167, 139, 252, 0.16),
+      transparent 30%
+    ),
+    rgba(255, 255, 255, 0.06);
 
-      text-transform: uppercase;
-    }
+  border:
+    1px solid rgba(255, 255, 255, 0.12);
 
-    .feature-list {
-      display: grid;
-      gap: 13px;
-    }
+  overflow: hidden;
+}
 
-    .feature-item {
-      display: grid;
-      grid-template-columns: 44px 1fr;
-      gap: 15px;
-      align-items: center;
+.event-shell::before {
+  content: "";
 
-      padding: 16px 18px;
+  position: absolute;
+  inset: 0;
 
-      border-radius: 18px;
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.05),
+      transparent 30%
+    );
 
-      background:
-        rgba(255,255,255,0.065);
+  pointer-events: none;
+}
 
-      border:
-        1px solid rgba(255,255,255,0.09);
+.event-section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-end;
 
-      transition:
-        transform 0.24s ease,
-        background 0.24s ease,
-        border-color 0.24s ease;
-    }
+  margin-bottom: 24px;
 
-    .feature-item-index {
-      width: 44px;
-      height: 44px;
+  position: relative;
+  z-index: 1;
+}
 
-      display: grid;
-      place-items: center;
+.event-kicker {
+  display: inline-block;
 
-      border-radius: 14px;
+  margin-bottom: 8px;
 
-      color: #111827;
+  color: var(--purple);
 
-      background:
-        linear-gradient(
-          135deg,
-          var(--gold),
-          var(--purple)
-        );
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1px;
 
-      font-size: 13px;
-      font-weight: 950;
-    }
+  text-transform: uppercase;
+}
 
-    .feature-item strong {
-      display: block;
+.event-archive-title {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
 
-      margin-bottom: 4px;
+.event-archive-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 
-      color: var(--gold);
+  padding: 10px 14px;
 
-      font-size: 15px;
-    }
+  border-radius: 999px;
 
-    .feature-item p {
-      color: #cbd5e1;
+  background:
+    rgba(255, 255, 255, 0.08);
 
-      font-size: 13.5px;
-      font-weight: 600;
-      line-height: 1.65;
-    }
+  border:
+    1px solid rgba(255, 255, 255, 0.12);
 
-    /* =========================================================
-       EVENTS — CROWN VERSION
-    ========================================================= */
+  color: #e5e7eb;
 
-    .event-shell {
-      position: relative;
-      padding: 34px;
-      border-radius: 30px;
+  font-size: 13px;
+  font-weight: 800;
 
-      background:
-        radial-gradient(
-          circle at top left,
-          rgba(250, 204, 21, 0.12),
-          transparent 28%
-        ),
-        radial-gradient(
-          circle at bottom right,
-          rgba(167, 139, 252, 0.16),
-          transparent 30%
-        ),
-        rgba(255, 255, 255, 0.06);
+  white-space: nowrap;
+}
 
-      border:
-        1px solid rgba(255, 255, 255, 0.12);
+.event-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
 
-      overflow: hidden;
-    }
+  position: relative;
+  z-index: 1;
+}
 
-    .event-shell::before {
-      content: "";
+.event-card {
+  position: relative;
 
-      position: absolute;
-      inset: 0;
+  padding: 26px;
 
-      background:
-        linear-gradient(
-          120deg,
-          rgba(255, 255, 255, 0.05),
-          transparent 30%
-        );
+  border-radius: 24px;
 
-      pointer-events: none;
-    }
+  background:
+    rgba(255, 255, 255, 0.075);
 
-    .event-section-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      align-items: flex-end;
+  border:
+    1px solid rgba(255, 255, 255, 0.11);
 
-      margin-bottom: 24px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.22);
 
-      position: relative;
-      z-index: 1;
-    }
+  overflow: hidden;
+}
 
-    .event-kicker {
-      display: inline-block;
+.event-card::after {
+  content: "";
 
-      margin-bottom: 8px;
+  position: absolute;
+  inset: 0;
 
-      color: var(--purple);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(250, 204, 21, 0.05),
+      transparent 36%
+    );
 
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 1px;
+  pointer-events: none;
+}
 
-      text-transform: uppercase;
-    }
+.event-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
 
-    .event-archive-title {
-      font-size: 30px;
-      font-weight: 900;
-      letter-spacing: -0.5px;
-    }
+  margin-bottom: 16px;
 
-    .event-archive-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+  position: relative;
+  z-index: 1;
+}
 
-      padding: 10px 14px;
+.event-head {
+  min-width: 0;
+}
 
-      border-radius: 999px;
+.event-head h3 {
+  margin-bottom: 6px;
 
-      background:
-        rgba(255, 255, 255, 0.08);
+  color: var(--gold);
 
-      border:
-        1px solid rgba(255, 255, 255, 0.12);
+  font-size: 25px;
+  line-height: 1.2;
+}
 
-      color: #e5e7eb;
+.event-date {
+  color: #cbd5e1;
 
-      font-size: 13px;
-      font-weight: 800;
+  font-size: 14px;
+  font-weight: 800;
+}
 
-      white-space: nowrap;
-    }
+.event-status {
+  display: inline-flex;
+  align-items: center;
 
-    .event-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
+  padding: 7px 12px;
 
-      position: relative;
-      z-index: 1;
-    }
+  border-radius: 999px;
 
-    .event-card {
-      position: relative;
+  background:
+    rgba(250, 204, 21, 0.12);
 
-      padding: 26px;
+  border:
+    1px solid rgba(250, 204, 21, 0.26);
 
-      border-radius: 24px;
+  color: var(--gold);
 
-      background:
-        rgba(255, 255, 255, 0.075);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
 
-      border:
-        1px solid rgba(255, 255, 255, 0.11);
+  white-space: nowrap;
+}
 
-      box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.22);
+.event-mode {
+  margin-bottom: 16px;
 
-      overflow: hidden;
-    }
+  position: relative;
+  z-index: 1;
 
-    .event-card::after {
-      content: "";
+  color: #e5e7eb;
 
-      position: absolute;
-      inset: 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.7;
+}
 
-      background:
-        linear-gradient(
-          135deg,
-          rgba(250, 204, 21, 0.05),
-          transparent 36%
-        );
+.event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 
-      pointer-events: none;
-    }
+  margin-bottom: 18px;
 
-    .event-topline {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 14px;
+  position: relative;
+  z-index: 1;
+}
 
-      margin-bottom: 16px;
+.event-meta span {
+  padding: 9px 12px;
 
-      position: relative;
-      z-index: 1;
-    }
+  border-radius: 999px;
 
-    .event-head {
-      min-width: 0;
-    }
+  background:
+    rgba(255, 255, 255, 0.07);
 
-    .event-head h3 {
-      margin-bottom: 6px;
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
 
-      color: var(--gold);
+  color: #dbe3ee;
 
-      font-size: 25px;
-      line-height: 1.2;
-    }
+  font-size: 13px;
+  font-weight: 700;
+}
 
-    .event-date {
-      color: #cbd5e1;
+.podium {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
 
-      font-size: 14px;
-      font-weight: 800;
-    }
+  position: relative;
+  z-index: 1;
+}
 
-    .event-status {
-      display: inline-flex;
-      align-items: center;
+.podium > div {
+  padding: 16px 14px;
 
-      padding: 7px 12px;
+  border-radius: 18px;
 
-      border-radius: 999px;
+  background:
+    rgba(255, 255, 255, 0.07);
 
-      background:
-        rgba(250, 204, 21, 0.12);
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
 
-      border:
-        1px solid rgba(250, 204, 21, 0.26);
+  text-align: center;
 
-      color: var(--gold);
+  transition:
+    transform 0.24s ease,
+    border-color 0.24s ease,
+    background 0.24s ease;
+}
 
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.5px;
+.podium .champion {
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(250, 204, 21, 0.12),
+      transparent 48%
+    ),
+    rgba(255, 255, 255, 0.075);
 
-      white-space: nowrap;
-    }
+  border-color:
+    rgba(250, 204, 21, 0.2);
+}
 
-    .event-mode {
-      margin-bottom: 16px;
+.podium span {
+  display: block;
 
-      position: relative;
-      z-index: 1;
+  margin-bottom: 6px;
 
-      color: #e5e7eb;
+  color: #9ca3af;
 
-      font-size: 15px;
-      font-weight: 700;
-      line-height: 1.7;
-    }
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
 
-    .event-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+.podium .champion span {
+  color: var(--gold);
+}
 
-      margin-bottom: 18px;
+.podium strong {
+  color: #ffffff;
 
-      position: relative;
-      z-index: 1;
-    }
+  font-size: 15px;
+  line-height: 1.55;
+}
 
-    .event-meta span {
-      padding: 9px 12px;
+.event-note {
+  margin-top: 16px;
 
-      border-radius: 999px;
+  position: relative;
+  z-index: 1;
 
-      background:
-        rgba(255, 255, 255, 0.07);
+  color: #cbd5e1;
 
-      border:
-        1px solid rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.75;
+}
 
-      color: #dbe3ee;
+/* REQUIREMENTS */
 
-      font-size: 13px;
-      font-weight: 700;
-    }
+.requirement-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
 
-    .podium {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+.requirement-card {
+  min-height: 230px;
 
-      position: relative;
-      z-index: 1;
-    }
+  padding: 24px;
 
-    .podium > div {
-      padding: 16px 14px;
+  position: relative;
 
-      border-radius: 18px;
+  overflow: hidden;
 
-      background:
-        rgba(255, 255, 255, 0.07);
+  border-radius: 24px;
 
-      border:
-        1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.065),
+      rgba(255,255,255,0.03)
+    );
 
-      text-align: center;
+  border:
+    1px solid rgba(255,255,255,0.10);
 
-      transition:
-        transform 0.24s ease,
-        border-color 0.24s ease,
-        background 0.24s ease;
-    }
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
 
-    .podium .champion {
-      background:
-        radial-gradient(
-          circle at top right,
-          rgba(250, 204, 21, 0.12),
-          transparent 48%
-        ),
-        rgba(255, 255, 255, 0.075);
+.requirement-card::after {
+  content: "";
 
-      border-color:
-        rgba(250, 204, 21, 0.2);
-    }
+  position: absolute;
 
-    .podium span {
-      display: block;
+  width: 180px;
+  height: 180px;
 
-      margin-bottom: 6px;
+  right: -80px;
+  top: -80px;
 
-      color: #9ca3af;
+  border-radius: 50%;
 
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.4px;
-    }
+  background:
+    radial-gradient(
+      circle,
+      rgba(167,139,250,0.1),
+      transparent 68%
+    );
+}
 
-    .podium .champion span {
-      color: var(--gold);
-    }
+.requirement-number {
+  margin-bottom: 25px;
 
-    .podium strong {
-      color: #ffffff;
+  color:
+    rgba(255,255,255,0.08);
 
-      font-size: 15px;
-      line-height: 1.55;
-    }
+  font-size: 42px;
+  font-weight: 950;
+  line-height: 1;
+}
 
-    .event-note {
-      margin-top: 16px;
+.requirement-card h3 {
+  margin-bottom: 12px;
 
-      position: relative;
-      z-index: 1;
+  color: var(--gold);
 
-      color: #cbd5e1;
+  font-size: 20px;
+}
 
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 1.75;
-    }
+.requirement-card ul {
+  padding-left: 18px;
 
-    /* =========================================================
-       REQUIREMENTS
-    ========================================================= */
+  color: #cbd5e1;
 
-    .requirement-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.9;
+}
 
-    .requirement-card {
-      min-height: 230px;
+/* APPLY */
 
-      padding: 24px;
+.apply-shell {
+  position: relative;
 
-      position: relative;
+  padding: 36px;
 
-      overflow: hidden;
+  overflow: hidden;
 
-      border-radius: 24px;
+  border-radius: 32px;
 
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,0.065),
-          rgba(255,255,255,0.03)
-        );
+  background:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(250,204,21,0.18),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 88% 14%,
+      rgba(167,139,252,0.18),
+      transparent 24%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(250,204,21,0.09),
+      rgba(167,139,252,0.1)
+    ),
+    rgba(255,255,255,0.055);
 
-      border:
-        1px solid rgba(255,255,255,0.10);
+  border:
+    1px solid rgba(255,255,255,0.14);
 
-      transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
-    }
+  box-shadow:
+    0 24px 60px rgba(0,0,0,0.26);
+}
 
-    .requirement-card::after {
-      content: "";
+.apply-shell::after {
+  content: "";
 
-      position: absolute;
+  position: absolute;
 
-      width: 180px;
-      height: 180px;
+  width: 420px;
+  height: 420px;
 
-      right: -80px;
-      top: -80px;
+  right: -140px;
+  bottom: -180px;
 
-      border-radius: 50%;
+  border-radius: 50%;
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(167,139,250,0.1),
-          transparent 68%
-        );
-    }
+  background:
+    radial-gradient(
+      circle,
+      rgba(167,139,252,0.16),
+      transparent 62%
+    );
 
-    .requirement-number {
-      margin-bottom: 25px;
+  filter: blur(18px);
+}
 
-      color:
-        rgba(255,255,255,0.08);
+.apply-grid {
+  position: relative;
+  z-index: 1;
 
-      font-size: 42px;
-      font-weight: 950;
-      line-height: 1;
-    }
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 26px;
+}
 
-    .requirement-card h3 {
-      margin-bottom: 12px;
+.apply-left,
+.apply-right {
+  min-width: 0;
+}
 
-      color: var(--gold);
+.apply-kicker {
+  display: inline-block;
 
-      font-size: 20px;
-    }
+  margin-bottom: 15px;
+  padding: 7px 11px;
 
-    .requirement-card ul {
-      padding-left: 18px;
+  border-radius: 999px;
 
-      color: #cbd5e1;
+  color: var(--gold);
 
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 1.9;
-    }
+  background:
+    rgba(255,255,255,0.075);
 
-    /* =========================================================
-       APPLY
-    ========================================================= */
+  border:
+    1px solid rgba(255,255,255,0.1);
 
-    .apply-shell {
-      position: relative;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
 
-      padding: 36px;
+.apply-title {
+  margin-bottom: 14px;
 
-      overflow: hidden;
+  font-size:
+    clamp(34px, 4vw, 52px);
 
-      border-radius: 32px;
+  font-weight: 950;
+  line-height: 1.03;
 
-      background:
-        radial-gradient(
-          circle at 10% 20%,
-          rgba(250,204,21,0.18),
-          transparent 26%
-        ),
-        radial-gradient(
-          circle at 88% 14%,
-          rgba(167,139,252,0.18),
-          transparent 24%
-        ),
-        linear-gradient(
-          135deg,
-          rgba(250,204,21,0.09),
-          rgba(167,139,252,0.1)
-        ),
-        rgba(255,255,255,0.055);
+  overflow-wrap: anywhere;
+}
 
-      border:
-        1px solid rgba(255,255,255,0.14);
+.apply-title span {
+  color: var(--purple);
+}
 
-      box-shadow:
-        0 24px 60px rgba(0,0,0,0.26);
-    }
+.apply-desc {
+  margin-bottom: 20px;
 
-    .apply-shell::after {
-      content: "";
+  color: #d1d5db;
 
-      position: absolute;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.8;
 
-      width: 420px;
-      height: 420px;
+  overflow-wrap: anywhere;
+}
 
-      right: -140px;
-      bottom: -180px;
+.apply-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
 
-      border-radius: 50%;
+  margin-bottom: 24px;
+}
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(167,139,252,0.16),
-          transparent 62%
-        );
+.apply-tags span {
+  padding: 8px 10px;
 
-      filter: blur(18px);
-    }
+  border-radius: 999px;
 
-    .apply-grid {
-      position: relative;
-      z-index: 1;
+  background:
+    rgba(255,255,255,0.07);
 
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 26px;
-    }
+  border:
+    1px solid rgba(255,255,255,0.09);
 
-    .apply-left,
-    .apply-right {
-      min-width: 0;
-    }
+  color: #e5e7eb;
 
-    .apply-kicker {
-      display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+}
 
-      margin-bottom: 15px;
-      padding: 7px 11px;
+.apply-process {
+  display: grid;
+  gap: 11px;
+}
 
-      border-radius: 999px;
+.apply-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
 
-      color: var(--gold);
+  padding: 14px;
 
-      background:
-        rgba(255,255,255,0.075);
+  border-radius: 17px;
 
-      border:
-        1px solid rgba(255,255,255,0.1);
+  background:
+    rgba(255,255,255,0.05);
 
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 1px;
-    }
+  border:
+    1px solid rgba(255,255,255,0.085);
+}
 
-    .apply-title {
-      margin-bottom: 14px;
+.apply-step-index {
+  width: 33px;
+  height: 33px;
+  flex-shrink: 0;
 
-      font-size:
-        clamp(34px, 4vw, 52px);
+  display: grid;
+  place-items: center;
 
-      font-weight: 950;
-      line-height: 1.03;
+  border-radius: 11px;
 
-      overflow-wrap: anywhere;
-    }
+  color: #111827;
 
-    .apply-title span {
-      color: var(--purple);
-    }
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold),
+      var(--gold-deep)
+    );
 
-    .apply-desc {
-      margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: 950;
+}
 
-      color: #d1d5db;
+.apply-step strong {
+  display: block;
 
-      font-size: 15px;
-      font-weight: 600;
-      line-height: 1.8;
+  margin-bottom: 4px;
 
-      overflow-wrap: anywhere;
-    }
+  font-size: 14px;
+}
 
-    .apply-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
+.apply-step p {
+  color: #aab4c4;
 
-      margin-bottom: 24px;
-    }
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.7;
 
-    .apply-tags span {
-      padding: 8px 10px;
+  overflow-wrap: anywhere;
+}
 
-      border-radius: 999px;
+.apply-contact-card {
+  height: 100%;
 
-      background:
-        rgba(255,255,255,0.07);
+  padding: 24px;
 
-      border:
-        1px solid rgba(255,255,255,0.09);
+  position: relative;
 
-      color: #e5e7eb;
+  overflow: hidden;
 
-      font-size: 11px;
-      font-weight: 800;
-    }
+  border-radius: 25px;
 
-    .apply-process {
-      display: grid;
-      gap: 11px;
-    }
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.08),
+      rgba(255,255,255,0.035)
+    );
 
-    .apply-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 13px;
+  border:
+    1px solid rgba(255,255,255,0.11);
+}
 
-      padding: 14px;
+.apply-contact-card::before {
+  content: "";
 
-      border-radius: 17px;
+  position: absolute;
 
-      background:
-        rgba(255,255,255,0.05);
+  width: 230px;
+  height: 230px;
 
-      border:
-        1px solid rgba(255,255,255,0.085);
-    }
+  right: -90px;
+  top: -90px;
 
-    .apply-step-index {
-      width: 33px;
-      height: 33px;
-      flex-shrink: 0;
+  border-radius: 50%;
 
-      display: grid;
-      place-items: center;
+  background:
+    radial-gradient(
+      circle,
+      rgba(250,204,21,0.14),
+      transparent 68%
+    );
+}
 
-      border-radius: 11px;
+.contact-content {
+  position: relative;
+  z-index: 1;
+}
 
-      color: #111827;
+.contact-content h3 {
+  margin-bottom: 9px;
 
-      background:
-        linear-gradient(
-          135deg,
-          var(--gold),
-          var(--gold-deep)
-        );
+  color: var(--gold);
 
-      font-size: 13px;
-      font-weight: 950;
-    }
+  font-size: 23px;
+}
 
-    .apply-step strong {
-      display: block;
+.contact-content > p {
+  margin-bottom: 18px;
 
-      margin-bottom: 4px;
+  color: #cbd5e1;
 
-      font-size: 14px;
-    }
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.75;
+}
 
-    .apply-step p {
-      color: #aab4c4;
+.wechat-card {
+  margin-bottom: 17px;
+  padding: 18px;
 
-      font-size: 13px;
-      font-weight: 600;
-      line-height: 1.7;
+  border-radius: 19px;
 
-      overflow-wrap: anywhere;
-    }
+  background:
+    rgba(255,255,255,0.07);
 
-    .apply-contact-card {
-      height: 100%;
+  border:
+    1px solid rgba(255,255,255,0.10);
+}
 
-      padding: 24px;
+.wechat-label {
+  margin-bottom: 7px;
 
-      position: relative;
+  color: #94a3b8;
 
-      overflow: hidden;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
 
-      border-radius: 25px;
+  text-transform: uppercase;
+}
 
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,0.08),
-          rgba(255,255,255,0.035)
-        );
+.wechat-id {
+  margin-bottom: 7px;
 
-      border:
-        1px solid rgba(255,255,255,0.11);
-    }
+  color: white;
 
-    .apply-contact-card::before {
-      content: "";
+  font-size:
+    clamp(22px, 3vw, 30px);
 
-      position: absolute;
+  font-weight: 950;
 
-      width: 230px;
-      height: 230px;
+  overflow-wrap: anywhere;
+}
 
-      right: -90px;
-      top: -90px;
+.wechat-tip {
+  color: var(--purple);
 
-      border-radius: 50%;
+  font-size: 12px;
+  font-weight: 800;
+}
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(250,204,21,0.14),
-          transparent 68%
-        );
-    }
+.contact-mini-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 
-    .contact-content {
-      position: relative;
-      z-index: 1;
-    }
+  margin-bottom: 15px;
+}
 
-    .contact-content h3 {
-      margin-bottom: 9px;
+.contact-mini-tags span {
+  padding: 7px 9px;
 
-      color: var(--gold);
+  border-radius: 999px;
 
-      font-size: 23px;
-    }
+  background:
+    rgba(255,255,255,0.06);
 
-    .contact-content > p {
-      margin-bottom: 18px;
+  border:
+    1px solid rgba(255,255,255,0.08);
 
-      color: #cbd5e1;
+  color: #d1d5db;
 
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 1.75;
-    }
+  font-size: 10px;
+  font-weight: 800;
+}
 
-    .wechat-card {
-      margin-bottom: 17px;
-      padding: 18px;
+.contact-note {
+  color: #94a3b8;
 
-      border-radius: 19px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.7;
+}
 
-      background:
-        rgba(255,255,255,0.07);
+/* FOOTER */
 
-      border:
-        1px solid rgba(255,255,255,0.10);
-    }
+footer {
+  margin-top: 40px;
+  padding: 34px 8%;
 
-    .wechat-label {
-      margin-bottom: 7px;
+  border-top:
+    1px solid rgba(255,255,255,0.08);
 
-      color: #94a3b8;
+  color: #9ca3af;
 
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 1.2px;
+  font-size: 14px;
+  line-height: 1.7;
+}
 
-      text-transform: uppercase;
-    }
+.site-credit {
+  margin-top: 14px;
 
-    .wechat-id {
-      margin-bottom: 7px;
+  color: #9ca3af;
 
-      color: white;
+  font-size: 13px;
+  font-weight: 600;
+}
 
-      font-size:
-        clamp(22px, 3vw, 30px);
+.site-credit a {
+  color: var(--gold);
 
-      font-weight: 950;
+  text-decoration: none;
 
-      overflow-wrap: anywhere;
-    }
+  font-weight: 800;
+}
 
-    .wechat-tip {
-      color: var(--purple);
+/* HOVER */
 
-      font-size: 12px;
-      font-weight: 800;
-    }
+@media (hover: hover) and (pointer: fine) {
+  .about-card:hover {
+    transform: translateY(-8px);
 
-    .contact-mini-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    border-color:
+      rgba(250,204,21,0.22);
 
-      margin-bottom: 15px;
-    }
+    box-shadow:
+      0 30px 70px rgba(0,0,0,0.27);
+  }
 
-    .contact-mini-tags span {
-      padding: 7px 9px;
+  .feature-item:hover {
+    transform: translateX(5px);
 
-      border-radius: 999px;
+    background:
+      rgba(255,255,255,0.09);
 
-      background:
-        rgba(255,255,255,0.06);
+    border-color:
+      rgba(167,139,250,0.25);
+  }
 
-      border:
-        1px solid rgba(255,255,255,0.08);
+  .requirement-card:hover {
+    transform: translateY(-7px);
 
-      color: #d1d5db;
+    border-color:
+      rgba(250,204,21,0.22);
 
-      font-size: 10px;
-      font-weight: 800;
-    }
+    box-shadow:
+      0 24px 50px rgba(0,0,0,0.23);
+  }
 
-    .contact-note {
-      color: #94a3b8;
+  .stat-pill:hover {
+    transform: translateY(-3px);
 
-      font-size: 12px;
-      font-weight: 600;
-      line-height: 1.7;
-    }
+    background:
+      rgba(255,255,255,0.11);
 
-    /* =========================================================
-       FOOTER
-    ========================================================= */
+    border-color:
+      rgba(250,204,21,0.28);
+  }
 
-    footer {
-      margin-top: 40px;
-      padding: 34px 8%;
+  .rank-card:hover {
+    border-color:
+      rgba(250,204,21,0.30);
 
-      border-top:
-        1px solid rgba(255,255,255,0.08);
+    box-shadow:
+      0 32px 84px rgba(0,0,0,0.42);
+  }
 
-      color: #9ca3af;
+  .event-card {
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
 
-      font-size: 14px;
-      line-height: 1.7;
-    }
+  .event-card:hover {
+    transform: translateY(-6px);
 
-    .site-credit {
-      margin-top: 14px;
+    border-color:
+      rgba(250,204,21,0.25);
 
-      color: #9ca3af;
+    box-shadow:
+      0 26px 58px rgba(0,0,0,0.28);
+  }
 
-      font-size: 13px;
-      font-weight: 600;
-    }
+  .podium > div:hover {
+    transform: translateY(-4px);
 
-    .site-credit a {
-      color: var(--gold);
+    border-color:
+      rgba(167,139,250,0.24);
+  }
 
-      text-decoration: none;
+  .podium .champion:hover {
+    border-color:
+      rgba(250,204,21,0.35);
+  }
+}
 
-      font-weight: 800;
-    }
+/* REVEAL */
 
-    /* =========================================================
-       DESKTOP HOVER
-    ========================================================= */
+body.motion-ready [data-reveal] {
+  opacity: 0;
 
-    @media (hover: hover) and (pointer: fine) {
+  transform:
+    translateY(28px);
 
-      .about-card:hover {
-        transform: translateY(-8px);
+  transition:
+    opacity 0.7s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    var(--reveal-delay, 0ms),
 
-        border-color:
-          rgba(250,204,21,0.22);
+    transform 0.7s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    var(--reveal-delay, 0ms);
+}
 
-        box-shadow:
-          0 30px 70px rgba(0,0,0,0.27);
-      }
+body.motion-ready [data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-      .feature-item:hover {
-        transform: translateX(5px);
+body.motion-ready [data-hero] {
+  opacity: 0;
+  transform: translateY(24px);
 
-        background:
-          rgba(255,255,255,0.09);
+  transition:
+    opacity 0.68s cubic-bezier(0.22,1,0.36,1),
+    transform 0.68s cubic-bezier(0.22,1,0.36,1);
+}
 
-        border-color:
-          rgba(167,139,250,0.25);
-      }
+body.motion-ready [data-hero].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-      .requirement-card:hover {
-        transform: translateY(-7px);
+/* ANIMATIONS */
 
-        border-color:
-          rgba(250,204,21,0.22);
+@keyframes character-float {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
 
-        box-shadow:
-          0 24px 50px rgba(0,0,0,0.23);
-      }
+  50% {
+    transform: translateY(-13px) rotate(-0.6deg);
+  }
+}
 
-      .stat-pill:hover {
-        transform: translateY(-3px);
+@keyframes card-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
 
-        background:
-          rgba(255,255,255,0.11);
+  50% {
+    transform: translateY(-7px);
+  }
+}
 
-        border-color:
-          rgba(250,204,21,0.28);
-      }
+@keyframes halo-breathe {
+  0%, 100% {
+    transform:
+      translateY(-8px) scale(0.97);
 
-      .rank-card:hover {
-        border-color:
-          rgba(250,204,21,0.30);
+    opacity: 0.72;
+  }
 
-        box-shadow:
-          0 32px 84px rgba(0,0,0,0.42);
-      }
+  50% {
+    transform:
+      translateY(-8px) scale(1.04);
 
-      .event-card {
-        transition:
-          transform 0.25s ease,
-          border-color 0.25s ease,
-          box-shadow 0.25s ease;
-      }
+    opacity: 1;
+  }
+}
 
-      .event-card:hover {
-        transform: translateY(-6px);
+@keyframes glow-drift {
+  0% {
+    transform:
+      translate(-16px, 14px) scale(0.95);
+  }
 
-        border-color:
-          rgba(250,204,21,0.25);
+  100% {
+    transform:
+      translate(18px, -10px) scale(1.07);
+  }
+}
 
-        box-shadow:
-          0 26px 58px rgba(0,0,0,0.28);
-      }
+@keyframes particle-float {
+  0%, 100% {
+    transform:
+      translate3d(0,0,0);
 
-      .podium > div:hover {
-        transform: translateY(-4px);
+    opacity: 0.35;
+  }
 
-        border-color:
-          rgba(167,139,250,0.24);
-      }
+  50% {
+    transform:
+      translate3d(
+        var(--dx, 12px),
+        var(--dy, -18px),
+        0
+      );
 
-      .podium .champion:hover {
-        border-color:
-          rgba(250,204,21,0.35);
-      }
-    }
+    opacity: 1;
+  }
+}
 
-    /* =========================================================
-       REVEAL
-    ========================================================= */
+@keyframes arena-spin {
+  from {
+    transform: rotate(0);
+  }
 
-    body.motion-ready [data-reveal] {
-      opacity: 0;
+  to {
+    transform: rotate(360deg);
+  }
+}
 
-      transform:
-        translateY(28px);
+@keyframes aurora-pulse {
+  0%, 100% {
+    transform: scale(0.96);
+    opacity: 0.82;
+  }
 
-      transition:
-        opacity 0.7s
-        cubic-bezier(0.22, 1, 0.36, 1)
-        var(--reveal-delay, 0ms),
+  50% {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+}
 
-        transform 0.7s
-        cubic-bezier(0.22, 1, 0.36, 1)
-        var(--reveal-delay, 0ms);
-    }
+@keyframes beam-sway {
+  0% {
+    transform:
+      rotate(24deg)
+      translate(34px, -10px);
+  }
 
-    body.motion-ready [data-reveal].is-visible {
-      opacity: 1;
+  100% {
+    transform:
+      rotate(20deg)
+      translate(18px, 6px);
+  }
+}
 
-      transform:
-        translateY(0);
-    }
+/* TABLET */
 
-    body.motion-ready [data-hero] {
-      opacity: 0;
+@media (max-width: 1100px) {
+  .apply-grid {
+    grid-template-columns: 1fr;
+  }
 
-      transform:
-        translateY(24px);
+  .feature-panel {
+    grid-template-columns: 1fr;
+  }
 
-      transition:
-        opacity 0.68s
-        cubic-bezier(0.22,1,0.36,1),
+  .feature-visual {
+    min-height: 280px;
+  }
+}
 
-        transform 0.68s
-        cubic-bezier(0.22,1,0.36,1);
-    }
+/* MOBILE */
 
-    body.motion-ready [data-hero].is-visible {
-      opacity: 1;
+@media (max-width: 920px) {
+  html {
+    scroll-padding-top: 82px;
+  }
 
-      transform:
-        translateY(0);
-    }
+  body,
+  main,
+  section,
+  .hero,
+  .hero-copy,
+  .visual,
+  .subtitle {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
 
-    /* =========================================================
-       ANIMATIONS
-    ========================================================= */
+  header {
+    padding: 14px 20px;
+  }
 
-    @keyframes character-float {
-      0%, 100% {
-        transform:
-          translateY(0) rotate(0);
-      }
+  header.is-scrolled {
+    padding: 11px 20px;
+  }
 
-      50% {
-        transform:
-          translateY(-13px) rotate(-0.6deg);
-      }
-    }
+  nav {
+    display: none;
+  }
 
-    @keyframes card-float {
-      0%, 100% {
-        transform:
-          translateY(0);
-      }
+  .brand {
+    gap: 11px;
+  }
 
-      50% {
-        transform:
-          translateY(-7px);
-      }
-    }
+  .brand-mark {
+    width: 38px;
+    height: 38px;
 
-    @keyframes halo-breathe {
-      0%, 100% {
-        transform:
-          translateY(-8px) scale(0.97);
+    border-radius: 11px;
+  }
 
-        opacity: 0.72;
-      }
+  .logo {
+    font-size: 22px;
+  }
 
-      50% {
-        transform:
-          translateY(-8px) scale(1.04);
+  .top-logo {
+    width: 46px;
+    height: 46px;
+  }
 
-        opacity: 1;
-      }
-    }
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    min-height: auto;
 
-    @keyframes glow-drift {
-      0% {
-        transform:
-          translate(-16px, 14px) scale(0.95);
-      }
+    padding:
+      38px 20px 56px;
+  }
 
-      100% {
-        transform:
-          translate(18px, -10px) scale(1.07);
-      }
-    }
+  .hero::before {
+    display: none;
+  }
 
-    @keyframes particle-float {
-      0%, 100% {
-        transform:
-          translate3d(0,0,0);
+  .hero-copy {
+    order: 1;
 
-        opacity: 0.35;
-      }
+    width: 100%;
+    min-width: 0;
+  }
 
-      50% {
-        transform:
-          translate3d(
-            var(--dx, 12px),
-            var(--dy, -18px),
-            0
-          );
+  .visual {
+    order: 2;
 
-        opacity: 1;
-      }
-    }
+    width: 100%;
 
-    @keyframes arena-spin {
-      from {
-        transform: rotate(0);
-      }
+    min-height: auto;
 
-      to {
-        transform: rotate(360deg);
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    @keyframes aurora-pulse {
-      0%, 100% {
-        transform: scale(0.96);
-        opacity: 0.82;
-      }
+    padding-top: 10px;
+  }
 
-      50% {
-        transform: scale(1.03);
-        opacity: 1;
-      }
-    }
+  .cr-logo {
+    width: min(210px, 60vw);
 
-    @keyframes beam-sway {
-      0% {
-        transform:
-          rotate(24deg)
-          translate(34px, -10px);
-      }
+    margin-bottom: 22px;
+  }
 
-      100% {
-        transform:
-          rotate(20deg)
-          translate(18px, 6px);
-      }
-    }
+  .tag {
+    max-width: 100%;
 
-    /* =========================================================
-       TABLET
-    ========================================================= */
+    margin-bottom: 20px;
 
-    @media (max-width: 1100px) {
+    padding: 8px 13px;
 
-      .apply-grid {
-        grid-template-columns: 1fr;
-      }
+    font-size: 12px;
+  }
 
-      .feature-panel {
-        grid-template-columns: 1fr;
-      }
+  h1 {
+    margin-bottom: 22px;
 
-      .feature-visual {
-        min-height: 280px;
-      }
-    }
+    font-size:
+      clamp(52px, 16vw, 76px);
 
-    /* =========================================================
-       MOBILE
-    ========================================================= */
+    line-height: 0.92;
+  }
 
-    @media (max-width: 920px) {
+  .subtitle {
+    width: 100%;
+    max-width: 100%;
 
-      html {
-        scroll-padding-top: 82px;
-      }
+    margin-bottom: 27px;
 
-      body,
-      main,
-      section,
-      .hero,
-      .hero-copy,
-      .visual,
-      .subtitle {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-      }
+    font-size: 16px;
+    line-height: 1.72;
 
-      header {
-        padding: 14px 20px;
-      }
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 
-      header.is-scrolled {
-        padding:
-          11px 20px;
-      }
+  .buttons {
+    width: 100%;
 
-      nav {
-        display: none;
-      }
+    display: grid;
 
-      .brand {
-        gap: 11px;
-      }
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
 
-      .brand-mark {
-        width: 38px;
-        height: 38px;
+    gap: 12px;
 
-        border-radius: 11px;
-      }
+    margin-bottom: 22px;
+  }
 
-      .logo {
-        font-size: 22px;
-      }
+  .btn {
+    width: 100%;
+    min-width: 0;
 
-      .top-logo {
-        width: 46px;
-        height: 46px;
-      }
+    padding: 14px 10px;
 
-      .hero {
-        grid-template-columns: 1fr;
+    font-size: 15px;
+  }
 
-        gap: 32px;
+  .quick-stats {
+    width: 100%;
 
-        min-height: auto;
+    display: grid;
 
-        padding:
-          38px 20px 56px;
-      }
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
 
-      .hero::before {
-        display: none;
-      }
+    gap: 10px;
+  }
 
-      .hero-copy {
-        order: 1;
+  .stat-pill {
+    width: 100%;
+    min-width: 0;
 
-        width: 100%;
-        min-width: 0;
-      }
+    padding: 12px 10px;
 
-      .visual {
-        order: 2;
+    border-radius: 14px;
 
-        width: 100%;
+    text-align: center;
 
-        min-height: auto;
+    font-size: 13px;
+    line-height: 1.35;
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    overflow-wrap: anywhere;
+  }
 
-        padding-top: 10px;
-      }
+  .stat-pill:nth-child(3) {
+    grid-column: 1 / -1;
+  }
 
-      .cr-logo {
-        width: min(210px, 60vw);
+  .hero-character-wrap {
+    width: 100%;
 
-        margin-bottom: 22px;
-      }
+    display: flex;
+    justify-content: center;
+  }
 
-      .tag {
-        max-width: 100%;
+  .hero-character {
+    width: min(350px, 94vw);
+    max-height: 390px;
+  }
 
-        margin-bottom: 20px;
+  .visual::before {
+    width: min(350px, 88vw);
+  }
 
-        padding: 8px 13px;
+  .visual::after {
+    width: min(300px, 75vw);
+  }
 
-        font-size: 12px;
-      }
+  .arena-ring {
+    width: min(390px, 100vw);
+  }
 
-      h1 {
-        margin-bottom: 22px;
+  .hero-aurora {
+    width: min(360px, 92vw);
+    height: min(360px, 92vw);
+  }
 
-        font-size:
-          clamp(52px, 16vw, 76px);
+  .light-beam {
+    width: 150px;
+    height: 340px;
+  }
 
-        line-height: 0.92;
-      }
+  .rank-card {
+    position: relative;
 
-      .subtitle {
-        width: 100%;
-        max-width: 100%;
+    right: auto;
+    bottom: auto;
 
-        margin-bottom: 27px;
+    width: 100%;
+    max-width: 380px;
 
-        font-size: 16px;
-        line-height: 1.72;
+    margin: -28px auto 0;
 
-        overflow-wrap: anywhere;
-        word-break: break-word;
-      }
+    padding: 15px;
 
-      .buttons {
-        width: 100%;
+    animation:
+      card-float 6.2s
+      ease-in-out infinite 0.45s;
+  }
 
-        display: grid;
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
+  .rank-frame {
+    padding: 14px;
+  }
 
-        gap: 12px;
+  .rank-badge {
+    font-size: 9px;
+  }
 
-        margin-bottom: 22px;
-      }
+  .rank-title {
+    font-size: 10px;
+  }
 
-      .btn {
-        width: 100%;
-        min-width: 0;
+  .number {
+    font-size: 33px;
 
-        padding: 14px 10px;
+    letter-spacing: -1px;
 
-        font-size: 15px;
-      }
+    overflow-wrap: anywhere;
+  }
 
-      .quick-stats {
-        width: 100%;
+  .rank-sub {
+    font-size: 12px;
+  }
 
-        display: grid;
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
+  .rank-desc {
+    font-size: 12px;
+  }
 
-        gap: 10px;
-      }
+  section {
+    padding: 48px 20px;
+  }
 
-      .stat-pill {
-        width: 100%;
-        min-width: 0;
+  .section-heading {
+    margin-bottom: 23px;
+  }
 
-        padding: 12px 10px;
+  .section-title {
+    font-size: 30px;
+  }
 
-        border-radius: 14px;
+  .section-subtitle {
+    width: 100%;
 
-        text-align: center;
+    font-size: 13.5px;
 
-        font-size: 13px;
-        line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
 
-        overflow-wrap: anywhere;
-      }
+  .slogan-band {
+    padding: 64px 20px;
+  }
 
-      .stat-pill:nth-child(3) {
-        grid-column: 1 / -1;
-      }
+  .slogan-overline {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
 
-      .hero-character-wrap {
-        width: 100%;
+  .slogan-main {
+    font-size:
+      clamp(31px, 9vw, 46px);
 
-        display: flex;
-        justify-content: center;
-      }
+    letter-spacing: -0.8px;
 
-      .hero-character {
-        width: min(350px, 94vw);
-        max-height: 390px;
-      }
+    overflow-wrap: anywhere;
+  }
 
-      .visual::before {
-        width:
-          min(350px, 88vw);
-      }
+  .slogan-note {
+    font-size: 11px;
+    letter-spacing: 1.4px;
+  }
 
-      .visual::after {
-        width:
-          min(300px, 75vw);
-      }
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
 
-      .arena-ring {
-        width:
-          min(390px, 100vw);
-      }
+  .about-card {
+    min-height: auto;
+    padding: 21px;
+  }
 
-      .hero-aurora {
-        width:
-          min(360px, 92vw);
+  .about-image-stage {
+    height: 175px;
+  }
 
-        height:
-          min(360px, 92vw);
-      }
+  .about-image-stage img {
+    max-height: 155px;
+  }
 
-      .light-beam {
-        width: 150px;
-        height: 340px;
-      }
+  .about-index {
+    font-size: 48px;
+  }
 
-      .rank-card {
-        position: relative;
+  .feature-panel {
+    grid-template-columns: 1fr;
 
-        right: auto;
-        bottom: auto;
+    gap: 15px;
 
-        width: 100%;
-        max-width: 380px;
+    padding: 22px;
+  }
 
-        margin:
-          -28px auto 0;
+  .feature-panel::before {
+    font-size: 110px;
+  }
 
-        padding: 15px;
+  .feature-visual {
+    min-height: 230px;
+  }
 
-        animation:
-          card-float 6.2s
-          ease-in-out infinite 0.45s;
-      }
+  .feature-visual::before {
+    width: 190px;
+    height: 190px;
+  }
 
-      .rank-frame {
-        padding: 14px;
-      }
+  .feature-visual::after {
+    width: 145px;
+    height: 145px;
+  }
 
-      .rank-badge {
-        font-size: 9px;
-      }
+  .feature-visual img {
+    max-height: 210px;
+  }
 
-      .rank-title {
-        font-size: 10px;
-      }
+  .feature-item {
+    grid-template-columns: 38px 1fr;
 
-      .number {
-        font-size: 33px;
+    gap: 11px;
 
-        letter-spacing: -1px;
+    padding: 13px;
+  }
 
-        overflow-wrap: anywhere;
-      }
+  .feature-item-index {
+    width: 38px;
+    height: 38px;
 
-      .rank-sub {
-        font-size: 12px;
-      }
+    border-radius: 12px;
+  }
 
-      .rank-desc {
-        font-size: 12px;
-      }
+  .feature-item p {
+    font-size: 12.5px;
 
-      section {
-        padding:
-          48px 20px;
-      }
+    overflow-wrap: anywhere;
+  }
 
-      .section-heading {
-        margin-bottom: 23px;
-      }
+  .event-shell {
+    padding: 22px;
+  }
 
-      .section-title {
-        font-size: 30px;
-      }
+  .event-section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 
-      .section-subtitle {
-        width: 100%;
+  .event-archive-title {
+    font-size: 26px;
+  }
 
-        font-size: 13.5px;
+  .event-card {
+    padding: 20px;
+  }
 
-        overflow-wrap: anywhere;
-      }
+  .event-topline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 
-      .slogan-band {
-        padding:
-          64px 20px;
-      }
+  .event-head {
+    width: 100%;
+  }
 
-      .slogan-overline {
-        font-size: 11px;
-        letter-spacing: 2px;
-      }
+  .event-head h3 {
+    font-size: 22px;
+  }
 
-      .slogan-main {
-        font-size:
-          clamp(31px, 9vw, 46px);
+  .event-mode {
+    font-size: 14px;
+  }
 
-        letter-spacing: -0.8px;
+  .event-meta {
+    gap: 8px;
+  }
 
-        overflow-wrap: anywhere;
-      }
+  .event-meta span {
+    padding: 7px 9px;
 
-      .slogan-note {
-        font-size: 11px;
-        letter-spacing: 1.4px;
-      }
+    font-size: 11px;
+  }
 
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
+  .podium {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
 
-      .about-card {
-        min-height: auto;
+    gap: 10px;
+  }
 
-        padding: 21px;
-      }
+  .podium > div {
+    min-width: 0;
 
-      .about-image-stage {
-        height: 175px;
-      }
+    padding: 14px 10px;
+  }
 
-      .about-image-stage img {
-        max-height: 155px;
-      }
+  .podium strong {
+    font-size: 14px;
 
-      .about-index {
-        font-size: 48px;
-      }
+    overflow-wrap: anywhere;
+  }
 
-      .feature-panel {
-        grid-template-columns: 1fr;
+  .event-note {
+    font-size: 13px;
+  }
 
-        gap: 15px;
+  .requirement-grid {
+    grid-template-columns: 1fr;
+  }
 
-        padding: 22px;
-      }
+  .requirement-card {
+    min-height: auto;
 
-      .feature-panel::before {
-        font-size: 110px;
-      }
+    padding: 21px;
+  }
 
-      .feature-visual {
-        min-height: 230px;
-      }
+  .requirement-number {
+    margin-bottom: 16px;
 
-      .feature-visual::before {
-        width: 190px;
-        height: 190px;
-      }
+    font-size: 34px;
+  }
 
-      .feature-visual::after {
-        width: 145px;
-        height: 145px;
-      }
+  .apply-shell {
+    padding: 21px;
 
-      .feature-visual img {
-        max-height: 210px;
-      }
+    border-radius: 25px;
+  }
 
-      .feature-item {
-        grid-template-columns: 38px 1fr;
+  .apply-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 
-        gap: 11px;
+  .apply-title {
+    max-width: 100%;
 
-        padding: 13px;
-      }
+    font-size:
+      clamp(29px, 9vw, 40px);
 
-      .feature-item-index {
-        width: 38px;
-        height: 38px;
+    overflow-wrap: anywhere;
+  }
 
-        border-radius: 12px;
-      }
+  .apply-desc {
+    width: 100%;
 
-      .feature-item p {
-        font-size: 12.5px;
+    font-size: 14px;
 
-        overflow-wrap: anywhere;
-      }
+    overflow-wrap: anywhere;
+  }
 
-      /* Crown-version events */
+  .apply-step {
+    width: 100%;
+    min-width: 0;
 
-      .event-shell {
-        padding: 22px;
-      }
+    padding: 12px;
+  }
 
-      .event-section-head {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
+  .apply-step > div:last-child {
+    min-width: 0;
+  }
 
-      .event-archive-title {
-        font-size: 26px;
-      }
+  .apply-contact-card {
+    width: 100%;
+    min-width: 0;
 
-      .event-card {
-        padding: 20px;
-      }
+    padding: 19px;
+  }
 
-      .event-topline {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
+  .wechat-id {
+    max-width: 100%;
 
-      .event-head {
-        width: 100%;
-      }
+    font-size: 24px;
 
-      .event-head h3 {
-        font-size: 22px;
-      }
+    overflow-wrap: anywhere;
+    word-break: break-all;
+  }
 
-      .event-mode {
-        font-size: 14px;
-      }
+  footer {
+    padding: 30px 20px;
+  }
+}
 
-      .event-meta {
-        gap: 8px;
-      }
+@media (max-width: 430px) {
+  header {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 
-      .event-meta span {
-        padding: 7px 9px;
+  .logo {
+    font-size: 20px;
+  }
 
-        font-size: 11px;
-      }
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+  }
 
-      .podium {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
+  .top-logo {
+    width: 42px;
+    height: 42px;
+  }
 
-        gap: 10px;
-      }
+  .hero {
+    padding:
+      32px 16px 48px;
+  }
 
-      .podium > div {
-        min-width: 0;
+  .subtitle {
+    font-size: 15px;
+    line-height: 1.68;
+  }
 
-        padding: 14px 10px;
-      }
+  .buttons {
+    grid-template-columns: 1fr;
+  }
 
-      .podium strong {
-        font-size: 14px;
+  .quick-stats {
+    grid-template-columns: 1fr;
+  }
 
-        overflow-wrap: anywhere;
-      }
+  .stat-pill:nth-child(3) {
+    grid-column: auto;
+  }
 
-      .event-note {
-        font-size: 13px;
-      }
+  .hero-character {
+    width: min(320px, 96vw);
+  }
 
-      .requirement-grid {
-        grid-template-columns: 1fr;
-      }
+  section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 
-      .requirement-card {
-        min-height: auto;
+  .slogan-band {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 
-        padding: 21px;
-      }
+  .podium {
+    grid-template-columns: 1fr;
+  }
 
-      .requirement-number {
-        margin-bottom: 16px;
+  .feature-panel,
+  .event-shell,
+  .apply-shell {
+    padding: 18px;
+  }
+}
 
-        font-size: 34px;
-      }
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-      .apply-shell {
-        padding: 21px;
+  *,
+  *::before,
+  *::after {
+    animation-duration:
+      0.01ms !important;
 
-        border-radius: 25px;
-      }
+    animation-iteration-count:
+      1 !important;
 
-      .apply-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
+    transition-duration:
+      0.01ms !important;
+  }
 
-      .apply-title {
-        max-width: 100%;
-
-        font-size:
-          clamp(29px, 9vw, 40px);
-
-        overflow-wrap: anywhere;
-      }
-
-      .apply-desc {
-        width: 100%;
-
-        font-size: 14px;
-
-        overflow-wrap: anywhere;
-      }
-
-      .apply-step {
-        width: 100%;
-        min-width: 0;
-
-        padding: 12px;
-      }
-
-      .apply-step > div:last-child {
-        min-width: 0;
-      }
-
-      .apply-contact-card {
-        width: 100%;
-        min-width: 0;
-
-        padding: 19px;
-      }
-
-      .wechat-id {
-        max-width: 100%;
-
-        font-size: 24px;
-
-        overflow-wrap: anywhere;
-        word-break: break-all;
-      }
-
-      footer {
-        padding:
-          30px 20px;
-      }
-    }
-
-    @media (max-width: 430px) {
-
-      header {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-
-      .logo {
-        font-size: 20px;
-      }
-
-      .brand-mark {
-        width: 36px;
-        height: 36px;
-      }
-
-      .top-logo {
-        width: 42px;
-        height: 42px;
-      }
-
-      .hero {
-        padding:
-          32px 16px 48px;
-      }
-
-      .subtitle {
-        font-size: 15px;
-        line-height: 1.68;
-      }
-
-      .buttons {
-        grid-template-columns: 1fr;
-      }
-
-      .quick-stats {
-        grid-template-columns: 1fr;
-      }
-
-      .stat-pill:nth-child(3) {
-        grid-column: auto;
-      }
-
-      .hero-character {
-        width:
-          min(320px, 96vw);
-      }
-
-      section {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-
-      .slogan-band {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-
-      .podium {
-        grid-template-columns: 1fr;
-      }
-
-      .feature-panel,
-      .event-shell,
-      .apply-shell {
-        padding: 18px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        animation-duration:
-          0.01ms !important;
-
-        animation-iteration-count:
-          1 !important;
-
-        transition-duration:
-          0.01ms !important;
-      }
-
-      body.motion-ready [data-reveal],
-      body.motion-ready [data-hero] {
-        opacity: 1;
-        transform: none;
-      }
-    }
-  </style>
+  body.motion-ready [data-reveal],
+  body.motion-ready [data-hero] {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="brand">
-      <div class="brand-mark">V</div>
-      <div class="logo">VEA-CR</div>
+<header>
+  <div class="brand">
+    <div class="brand-mark">V</div>
+    <div class="logo">VEA-CR</div>
+  </div>
+
+  <div class="header-right">
+    <nav>
+      <a href="#about">组织介绍</a>
+      <a href="#honor">组织特色</a>
+      <a href="#events">内部赛事</a>
+      <a href="#requirements">加入门槛</a>
+      <a href="#apply">申请加入</a>
+    </nav>
+
+    <img
+      class="top-logo"
+      src="logo.png"
+      alt="VEA logo"
+    >
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+
+  <div class="hero-copy">
+
+    <img
+      class="cr-logo"
+      data-hero
+      src="Clash%20royale.png"
+      alt="Clash Royale logo"
+    >
+
+    <div class="tag" data-hero>
+      皇室战争国服 · 竞技组织
     </div>
 
-    <div class="header-right">
-      <nav>
-        <a href="#about">组织介绍</a>
-        <a href="#honor">组织特色</a>
-        <a href="#events">内部赛事</a>
-        <a href="#requirements">加入门槛</a>
-        <a href="#apply">申请加入</a>
-      </nav>
+    <h1 data-hero>
+      VEA<br>
+      <span class="highlight">
+        招新中
+      </span>
+    </h1>
 
+    <p class="subtitle" data-hero>
+      VEA 是皇室战争国服玩家组织，成立于 2025.10.21。旗下部落「极光圣域」
+      （Veil Ethereal Aurora）成立于 2025.4.11。组织首任首领为冷砚，
+      2026.9.16 由橙汁接任第二任首领。当前招新门槛为紫水晶结算 topk。
+      组织每周举办内部赛事，并不定期设置奖金赛事；内部氛围活跃友好，
+      汇聚了众多天梯高分玩家。欢迎有稳定实力、愿意交流并长期参与组织建设的玩家加入。
+      有意加入可联系：17358226859。
+    </p>
+
+    <div class="buttons" data-hero>
+      <a
+        class="btn btn-primary"
+        href="#apply"
+      >
+        申请加入
+      </a>
+
+      <a
+        class="btn btn-secondary"
+        href="#requirements"
+      >
+        查看门槛
+      </a>
+    </div>
+
+    <div class="quick-stats" data-hero>
+      <div class="stat-pill">
+        紫水晶结算topk
+      </div>
+
+      <div class="stat-pill">
+        国服玩家组织
+      </div>
+
+      <div class="stat-pill">
+        长期招新中
+      </div>
+    </div>
+
+  </div>
+
+  <div class="visual" data-hero>
+
+    <div class="arena-ring"></div>
+    <div class="hero-aurora"></div>
+    <div class="light-beam"></div>
+
+    <div
+      class="visual-particles"
+      aria-hidden="true"
+    >
+
+      <span
+        class="particle gold"
+        style="
+          width:8px;
+          height:8px;
+          left:10%;
+          top:15%;
+          --dx:14px;
+          --dy:-22px;
+          --dur:7.8s;
+          --delay:0.3s;
+        "
+      ></span>
+
+      <span
+        class="particle purple"
+        style="
+          width:6px;
+          height:6px;
+          left:19%;
+          top:70%;
+          --dx:-10px;
+          --dy:-18px;
+          --dur:6.9s;
+          --delay:1.2s;
+        "
+      ></span>
+
+      <span
+        class="particle gold"
+        style="
+          width:10px;
+          height:10px;
+          left:62%;
+          top:18%;
+          --dx:10px;
+          --dy:-24px;
+          --dur:8.2s;
+          --delay:0.8s;
+        "
+      ></span>
+
+      <span
+        class="particle purple"
+        style="
+          width:7px;
+          height:7px;
+          left:81%;
+          top:42%;
+          --dx:-12px;
+          --dy:-20px;
+          --dur:7.2s;
+          --delay:1.7s;
+        "
+      ></span>
+
+      <span
+        class="particle gold"
+        style="
+          width:5px;
+          height:5px;
+          left:74%;
+          top:72%;
+          --dx:8px;
+          --dy:-16px;
+          --dur:6.6s;
+          --delay:0.5s;
+        "
+      ></span>
+
+      <span
+        class="particle purple"
+        style="
+          width:9px;
+          height:9px;
+          left:34%;
+          top:26%;
+          --dx:-8px;
+          --dy:-22px;
+          --dur:8.6s;
+          --delay:1.4s;
+        "
+      ></span>
+
+      <span
+        class="particle soft"
+        style="
+          width:4px;
+          height:4px;
+          left:58%;
+          top:32%;
+          --dx:-6px;
+          --dy:-18px;
+          --dur:6.4s;
+          --delay:1.6s;
+        "
+      ></span>
+
+      <span
+        class="particle gold"
+        style="
+          width:11px;
+          height:11px;
+          left:77%;
+          top:24%;
+          --dx:10px;
+          --dy:-26px;
+          --dur:9s;
+          --delay:0.4s;
+        "
+      ></span>
+
+    </div>
+
+    <div class="hero-character-wrap">
       <img
-        class="top-logo"
-        src="logo.png"
-        alt="VEA logo"
+        class="hero-character"
+        src="Knight.png"
+        alt="VEA Clash Royale character"
       >
     </div>
-  </header>
 
-  <main>
+    <div class="rank-card">
 
-    <section class="hero">
+      <div class="rank-frame">
 
-      <div class="hero-copy">
+        <div class="rank-header">
 
+          <div class="rank-badge">
+            RECRUITMENT REQUIREMENT
+          </div>
+
+          <div class="rank-emblem">
+            <img
+              src="logo.png"
+              alt="VEA"
+            >
+          </div>
+
+        </div>
+
+        <div class="rank-title">
+          VEA Rank Card
+        </div>
+
+        <div class="number">
+          紫水晶结算topk
+        </div>
+
+        <div class="rank-sub">
+          Competitive · Active · Long-term
+        </div>
+
+        <p class="rank-desc">
+          当前招新以稳定竞技能力为核心标准。
+          申请者需长期活跃，并愿意参与组织交流与赛事活动。
+        </p>
+
+        <div class="rank-tags">
+          <span>高活跃</span>
+          <span>长期参与</span>
+          <span>竞技导向</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="slogan-band">
+
+  <div class="slogan-inner">
+
+    <div class="slogan-overline">
+      Veil Ethereal Aurora
+    </div>
+
+    <div class="slogan-main">
+      BUILT FOR
+      <span>COMPETITION.</span>
+      <br>
+      UNITED BY VEA.
+    </div>
+
+    <div class="slogan-divider"></div>
+
+    <div class="slogan-note">
+      VEA · Clash Royale
+    </div>
+
+  </div>
+
+</section>
+
+<section id="about">
+
+  <div class="section-heading">
+    <span class="section-kicker">
+      Who We Are
+    </span>
+
+    <h2 class="section-title">
+      关于 VEA
+    </h2>
+
+    <p class="section-subtitle">
+      以竞技、交流与长期建设为核心，打造稳定活跃的皇室战争玩家组织。
+    </p>
+  </div>
+
+  <div class="about-grid">
+
+    <article class="about-card">
+
+      <div class="about-index">
+        01
+      </div>
+
+      <div class="about-image-stage">
         <img
-          class="cr-logo"
-          data-hero
-          src="Clash%20royale.png"
-          alt="Clash Royale logo"
+          src="Dark_knight.png"
+          alt="Dark knight"
         >
-
-        <div class="tag" data-hero>
-          皇室战争国服 · 竞技组织
-        </div>
-
-        <h1 data-hero>
-          VEA<br>
-          <span class="highlight">
-            招新中
-          </span>
-        </h1>
-
-        <p class="subtitle" data-hero>
-          VEA 旗下部落「极光圣域」建立于 2025.4.11，隶属于 VEA 组织
-          “Veil Ethereal Aurora”。我们面向皇室战争国服高活跃玩家开放招新，
-          组织内不定期举办锦标赛，假期比赛奖励更加丰厚。
-          欢迎有稳定实力、愿意交流、愿意长期参与组织建设的玩家加入。
-        </p>
-
-        <div class="buttons" data-hero>
-          <a
-            class="btn btn-primary"
-            href="#apply"
-          >
-            申请加入
-          </a>
-
-          <a
-            class="btn btn-secondary"
-            href="#requirements"
-          >
-            查看门槛
-          </a>
-        </div>
-
-        <div class="quick-stats" data-hero>
-          <div class="stat-pill">
-            紫水晶结算topk
-          </div>
-
-          <div class="stat-pill">
-            国服玩家组织
-          </div>
-
-          <div class="stat-pill">
-            长期招新中
-          </div>
-        </div>
-
       </div>
 
-      <div class="visual" data-hero>
+      <div class="about-chip">
+        COMPETITION
+      </div>
 
-        <div class="arena-ring"></div>
-        <div class="hero-aurora"></div>
-        <div class="light-beam"></div>
+      <h3>
+        竞技导向
+      </h3>
 
-        <div
-          class="visual-particles"
-          aria-hidden="true"
+      <p>
+        以天梯、锦标赛、内部交流和实战复盘为核心，
+        重视玩家长期实力提升。
+      </p>
+
+    </article>
+
+    <article class="about-card">
+
+      <div class="about-index">
+        02
+      </div>
+
+      <div class="about-image-stage">
+        <img
+          src="Mega_minion.png"
+          alt="Mega minion"
         >
-
-          <span
-            class="particle gold"
-            style="
-              width:8px;
-              height:8px;
-              left:10%;
-              top:15%;
-              --dx:14px;
-              --dy:-22px;
-              --dur:7.8s;
-              --delay:0.3s;
-            "
-          ></span>
-
-          <span
-            class="particle purple"
-            style="
-              width:6px;
-              height:6px;
-              left:19%;
-              top:70%;
-              --dx:-10px;
-              --dy:-18px;
-              --dur:6.9s;
-              --delay:1.2s;
-            "
-          ></span>
-
-          <span
-            class="particle gold"
-            style="
-              width:10px;
-              height:10px;
-              left:62%;
-              top:18%;
-              --dx:10px;
-              --dy:-24px;
-              --dur:8.2s;
-              --delay:0.8s;
-            "
-          ></span>
-
-          <span
-            class="particle purple"
-            style="
-              width:7px;
-              height:7px;
-              left:81%;
-              top:42%;
-              --dx:-12px;
-              --dy:-20px;
-              --dur:7.2s;
-              --delay:1.7s;
-            "
-          ></span>
-
-          <span
-            class="particle gold"
-            style="
-              width:5px;
-              height:5px;
-              left:74%;
-              top:72%;
-              --dx:8px;
-              --dy:-16px;
-              --dur:6.6s;
-              --delay:0.5s;
-            "
-          ></span>
-
-          <span
-            class="particle purple"
-            style="
-              width:9px;
-              height:9px;
-              left:34%;
-              top:26%;
-              --dx:-8px;
-              --dy:-22px;
-              --dur:8.6s;
-              --delay:1.4s;
-            "
-          ></span>
-
-          <span
-            class="particle soft"
-            style="
-              width:4px;
-              height:4px;
-              left:58%;
-              top:32%;
-              --dx:-6px;
-              --dy:-18px;
-              --dur:6.4s;
-              --delay:1.6s;
-            "
-          ></span>
-
-          <span
-            class="particle gold"
-            style="
-              width:11px;
-              height:11px;
-              left:77%;
-              top:24%;
-              --dx:10px;
-              --dy:-26px;
-              --dur:9s;
-              --delay:0.4s;
-            "
-          ></span>
-
-        </div>
-
-        <div class="hero-character-wrap">
-          <img
-            class="hero-character"
-            src="Knight.png"
-            alt="VEA Clash Royale character"
-          >
-        </div>
-
-        <div class="rank-card">
-
-          <div class="rank-frame">
-
-            <div class="rank-header">
-
-              <div class="rank-badge">
-                RECRUITMENT REQUIREMENT
-              </div>
-
-              <div class="rank-emblem">
-                <img
-                  src="logo.png"
-                  alt="VEA"
-                >
-              </div>
-
-            </div>
-
-            <div class="rank-title">
-              VEA Rank Card
-            </div>
-
-            <div class="number">
-              紫水晶结算topk
-            </div>
-
-            <div class="rank-sub">
-              Competitive · Active · Long-term
-            </div>
-
-            <p class="rank-desc">
-              当前招新以稳定竞技能力为核心标准。
-              申请者需长期活跃，并愿意参与组织交流与赛事活动。
-            </p>
-
-            <div class="rank-tags">
-              <span>高活跃</span>
-              <span>长期参与</span>
-              <span>竞技导向</span>
-            </div>
-
-          </div>
-
-        </div>
-
       </div>
 
-    </section>
-
-    <section class="slogan-band">
-
-      <div class="slogan-inner">
-
-        <div class="slogan-overline">
-          Veil Ethereal Aurora
-        </div>
-
-        <div class="slogan-main">
-          BUILT FOR
-          <span>COMPETITION.</span>
-          <br>
-          UNITED BY VEA.
-        </div>
-
-        <div class="slogan-divider"></div>
-
-        <div class="slogan-note">
-          VEA · Clash Royale
-        </div>
-
+      <div class="about-chip">
+        COMMUNITY
       </div>
 
-    </section>
+      <h3>
+        活跃社群
+      </h3>
 
-    <section id="about">
+      <p>
+        组织成员保持稳定交流，
+        围绕卡组、版本环境、对局思路和赛事信息展开讨论。
+      </p>
 
-      <div class="section-heading">
-        <span class="section-kicker">
-          Who We Are
-        </span>
+    </article>
 
-        <h2 class="section-title">
-          关于 VEA
-        </h2>
+    <article class="about-card">
 
-        <p class="section-subtitle">
-          以竞技、交流与长期建设为核心，打造稳定活跃的皇室战争玩家组织。
-        </p>
+      <div class="about-index">
+        03
       </div>
 
-      <div class="about-grid">
+      <div class="about-image-stage">
+        <img
+          src="crown.png"
+          alt="Crown"
+        >
+      </div>
 
-        <article class="about-card">
+      <div class="about-chip">
+        LONG-TERM
+      </div>
 
-          <div class="about-index">
+      <h3>
+        长期建设
+      </h3>
+
+      <p>
+        VEA 不只是临时招人，
+        而是希望逐步建设成有成员体系、荣誉记录和组织文化的玩家组织。
+      </p>
+
+    </article>
+
+  </div>
+
+</section>
+
+<section id="honor">
+
+  <div class="section-heading">
+
+    <span class="section-kicker">
+      VEA Identity
+    </span>
+
+    <h2 class="section-title">
+      组织特色
+    </h2>
+
+  </div>
+
+  <div class="feature-panel">
+
+    <div class="feature-visual">
+
+      <img
+        src="Ultimate.png"
+        alt="VEA ultimate character"
+      >
+
+    </div>
+
+    <div class="feature-content">
+
+      <div class="feature-small-title">
+        What defines VEA
+      </div>
+
+      <div class="feature-list">
+
+        <div class="feature-item">
+
+          <div class="feature-item-index">
             01
           </div>
 
-          <div class="about-image-stage">
-            <img
-              src="Dark_knight.png"
-              alt="Dark knight"
-            >
+          <div>
+            <strong>
+              高段位玩家集结
+            </strong>
+
+            <p>
+              以紫水晶结算topk作为当前基础门槛，
+              筛选具备稳定实力与活跃度的玩家。
+            </p>
           </div>
 
-          <div class="about-chip">
-            COMPETITION
-          </div>
+        </div>
 
-          <h3>
-            竞技导向
-          </h3>
+        <div class="feature-item">
 
-          <p>
-            以天梯、锦标赛、内部交流和实战复盘为核心，
-            重视玩家长期实力提升。
-          </p>
-
-        </article>
-
-        <article class="about-card">
-
-          <div class="about-index">
+          <div class="feature-item-index">
             02
           </div>
 
-          <div class="about-image-stage">
-            <img
-              src="Mega_minion.png"
-              alt="Mega minion"
-            >
+          <div>
+            <strong>
+              重视对局交流
+            </strong>
+
+            <p>
+              鼓励成员围绕卡组选择、版本环境与实战细节进行交流与复盘。
+            </p>
           </div>
 
-          <div class="about-chip">
-            COMMUNITY
-          </div>
+        </div>
 
-          <h3>
-            活跃社群
-          </h3>
+        <div class="feature-item">
 
-          <p>
-            组织成员保持稳定交流，
-            围绕卡组、版本环境、对局思路和赛事信息展开讨论。
-          </p>
-
-        </article>
-
-        <article class="about-card">
-
-          <div class="about-index">
+          <div class="feature-item-index">
             03
           </div>
 
-          <div class="about-image-stage">
-            <img
-              src="crown.png"
-              alt="Crown"
-            >
-          </div>
+          <div>
+            <strong>
+              比赛奖励丰厚
+            </strong>
 
-          <div class="about-chip">
-            LONG-TERM
-          </div>
-
-          <h3>
-            长期建设
-          </h3>
-
-          <p>
-            VEA 不只是临时招人，
-            而是希望逐步建设成有成员体系、荣誉记录和组织文化的玩家组织。
-          </p>
-
-        </article>
-
-      </div>
-
-    </section>
-
-    <section id="honor">
-
-      <div class="section-heading">
-
-        <span class="section-kicker">
-          VEA Identity
-        </span>
-
-        <h2 class="section-title">
-          组织特色
-        </h2>
-
-      </div>
-
-      <div class="feature-panel">
-
-        <div class="feature-visual">
-
-          <img
-            src="Ultimate.png"
-            alt="VEA ultimate character"
-          >
-
-        </div>
-
-        <div class="feature-content">
-
-          <div class="feature-small-title">
-            What defines VEA
-          </div>
-
-          <div class="feature-list">
-
-            <div class="feature-item">
-
-              <div class="feature-item-index">
-                01
-              </div>
-
-              <div>
-                <strong>
-                  高段位玩家集结
-                </strong>
-
-                <p>
-                  以紫水晶结算topk作为当前基础门槛，
-                  筛选具备稳定实力与活跃度的玩家。
-                </p>
-              </div>
-
-            </div>
-
-            <div class="feature-item">
-
-              <div class="feature-item-index">
-                02
-              </div>
-
-              <div>
-                <strong>
-                  重视对局交流
-                </strong>
-
-                <p>
-                  鼓励成员围绕卡组选择、版本环境与实战细节进行交流与复盘。
-                </p>
-              </div>
-
-            </div>
-
-            <div class="feature-item">
-
-              <div class="feature-item-index">
-                03
-              </div>
-
-              <div>
-                <strong>
-                  比赛奖励丰厚
-                </strong>
-
-                <p>
-                  组织不定期举办内部锦标赛与活动，
-                  假期赛事设置更加丰富的奖励。
-                </p>
-              </div>
-
-            </div>
-
+            <p>
+              组织不定期举办内部锦标赛与活动，
+              假期赛事设置更加丰富的奖励。
+            </p>
           </div>
 
         </div>
 
       </div>
 
-    </section>
+    </div>
 
-    <!-- 皇冠版内部赛事 -->
+  </div>
 
-    <section id="events">
+</section>
 
-      <div class="section-heading">
+<section id="events">
 
-        <span class="section-kicker">
+  <div class="section-heading">
+
+    <span class="section-kicker">
+      Tournament Archive
+    </span>
+
+    <h2 class="section-title">
+      内部赛事
+    </h2>
+
+    <p class="section-subtitle">
+      以内部锦标赛与练习赛为核心，
+      持续记录 VEA 的赛事档案与组织活跃度。
+    </p>
+
+  </div>
+
+  <div class="event-shell">
+
+    <div class="event-section-head">
+
+      <div>
+
+        <span class="event-kicker">
           Tournament Archive
         </span>
 
-        <h2 class="section-title">
-          内部赛事
-        </h2>
-
-        <p class="section-subtitle">
-          以内部锦标赛与练习赛为核心，
-          持续记录 VEA 的赛事档案与组织活跃度。
-        </p>
+        <h3 class="event-archive-title">
+          VEA 赛事档案
+        </h3>
 
       </div>
 
-      <div class="event-shell">
+      <div class="event-archive-badge">
+        🏆 持续更新中
+      </div>
 
-        <div class="event-section-head">
+    </div>
+
+    <div class="event-grid">
+
+      <article class="event-card">
+
+        <div class="event-topline">
+
+          <div class="event-head">
+
+            <h3>
+              第三届内部 KOH 练习赛
+            </h3>
+
+            <div class="event-date">
+              6.11 · 20:00 开始
+            </div>
+
+          </div>
+
+          <div class="event-status">
+            已归档
+          </div>
+
+        </div>
+
+        <p class="event-mode">
+          模式：KOH 对抗赛 · 8v8 分队对决
+        </p>
+
+        <div class="event-meta">
+          <span>内部对抗</span>
+          <span>团队练习赛</span>
+          <span>赛事记录保留</span>
+        </div>
+
+        <div class="podium">
+
+          <div class="champion">
+
+            <span>
+              👑 冠军
+            </span>
+
+            <strong>
+              左耳
+              <br>
+              安菲尔德的夜
+            </strong>
+
+          </div>
 
           <div>
 
-            <span class="event-kicker">
-              Tournament Archive
+            <span>
+              亚军
             </span>
 
-            <h3 class="event-archive-title">
-              VEA 赛事档案
-            </h3>
+            <strong>
+              飞
+              <br>
+              神之一手
+            </strong>
 
-          </div>
-
-          <div class="event-archive-badge">
-            🏆 持续更新中
           </div>
 
         </div>
 
-        <div class="event-grid">
-
-          <article class="event-card">
-
-            <div class="event-topline">
-
-              <div class="event-head">
-
-                <h3>
-                  第三届内部 KOH 练习赛
-                </h3>
-
-                <div class="event-date">
-                  6.11 · 20:00 开始
-                </div>
-
-              </div>
-
-              <div class="event-status">
-                已归档
-              </div>
-
-            </div>
-
-            <p class="event-mode">
-              模式：KOH 对抗赛 · 8v8 分队对决
-            </p>
-
-            <div class="event-meta">
-
-              <span>
-                内部对抗
-              </span>
-
-              <span>
-                团队练习赛
-              </span>
-
-              <span>
-                赛事记录保留
-              </span>
-
-            </div>
-
-            <div class="podium">
-
-              <div class="champion">
-
-                <span>
-                  👑 冠军
-                </span>
-
-                <strong>
-                  左耳
-                  <br>
-                  安菲尔德的夜
-                </strong>
-
-              </div>
-
-              <div>
-
-                <span>
-                  亚军
-                </span>
-
-                <strong>
-                  飞
-                  <br>
-                  神之一手
-                </strong>
-
-              </div>
-
-            </div>
-
-            <p class="event-note">
-              该赛事作为组织内部 KOH 系列练习赛之一，
-              主要用于提升成员实战交流与团队协作氛围。
-              后续赛事记录将继续收录于此。
-            </p>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <section id="requirements">
-
-      <div class="section-heading">
-
-        <span class="section-kicker">
-          Recruitment
-        </span>
-
-        <h2 class="section-title">
-          加入门槛
-        </h2>
-
-      </div>
-
-      <div class="requirement-grid">
-
-        <article class="requirement-card">
-
-          <div class="requirement-number">
-            01
-          </div>
-
-          <h3>
-            段位要求
-          </h3>
-
-          <ul>
-            <li>紫水晶结算topk</li>
-            <li>具备稳定对战水平</li>
-            <li>能适应当前版本环境</li>
-          </ul>
-
-        </article>
-
-        <article class="requirement-card">
-
-          <div class="requirement-number">
-            02
-          </div>
-
-          <h3>
-            活跃要求
-          </h3>
-
-          <ul>
-            <li>长期活跃</li>
-            <li>愿意参与组织交流</li>
-            <li>不长期潜水</li>
-          </ul>
-
-        </article>
-
-        <article class="requirement-card">
-
-          <div class="requirement-number">
-            03
-          </div>
-
-          <h3>
-            组织要求
-          </h3>
-
-          <ul>
-            <li>尊重成员</li>
-            <li>服从基本管理安排</li>
-            <li>禁止恶意引战与破坏组织秩序</li>
-          </ul>
-
-        </article>
-
-      </div>
-
-    </section>
-
-    <section id="apply">
-
-      <div class="section-heading">
-
-        <span class="section-kicker">
-          Join VEA
-        </span>
-
-        <h2 class="section-title">
-          申请加入
-        </h2>
-
-        <p class="section-subtitle">
-          如果你符合当前招新门槛，
-          并愿意长期参与组织建设，欢迎加入 VEA。
+        <p class="event-note">
+          该赛事作为组织内部 KOH 系列练习赛之一，
+          主要用于提升成员实战交流与团队协作氛围。
+          后续赛事记录将继续收录于此。
         </p>
 
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="requirements">
+
+  <div class="section-heading">
+
+    <span class="section-kicker">
+      Recruitment
+    </span>
+
+    <h2 class="section-title">
+      加入门槛
+    </h2>
+
+  </div>
+
+  <div class="requirement-grid">
+
+    <article class="requirement-card">
+
+      <div class="requirement-number">
+        01
       </div>
 
-      <div class="apply-shell">
+      <h3>
+        段位要求
+      </h3>
 
-        <div class="apply-grid">
+      <ul>
+        <li>紫水晶结算topk</li>
+        <li>具备稳定对战水平</li>
+        <li>能适应当前版本环境</li>
+      </ul>
 
-          <div class="apply-left">
+    </article>
 
-            <div class="apply-kicker">
-              JOIN VEA
+    <article class="requirement-card">
+
+      <div class="requirement-number">
+        02
+      </div>
+
+      <h3>
+        活跃要求
+      </h3>
+
+      <ul>
+        <li>长期活跃</li>
+        <li>愿意参与组织交流</li>
+        <li>不长期潜水</li>
+      </ul>
+
+    </article>
+
+    <article class="requirement-card">
+
+      <div class="requirement-number">
+        03
+      </div>
+
+      <h3>
+        组织要求
+      </h3>
+
+      <ul>
+        <li>尊重成员</li>
+        <li>服从基本管理安排</li>
+        <li>禁止恶意引战与破坏组织秩序</li>
+      </ul>
+
+    </article>
+
+  </div>
+
+</section>
+
+<section id="apply">
+
+  <div class="section-heading">
+
+    <span class="section-kicker">
+      Join VEA
+    </span>
+
+    <h2 class="section-title">
+      申请加入
+    </h2>
+
+    <p class="section-subtitle">
+      如果你符合当前招新门槛，
+      并愿意长期参与组织建设，欢迎加入 VEA。
+    </p>
+
+  </div>
+
+  <div class="apply-shell">
+
+    <div class="apply-grid">
+
+      <div class="apply-left">
+
+        <div class="apply-kicker">
+          JOIN VEA
+        </div>
+
+        <h3 class="apply-title">
+          Ready to join
+          <span>VEA</span>?
+        </h3>
+
+        <p class="apply-desc">
+          我们欢迎稳定活跃、热爱竞技、愿意交流的皇室战争玩家加入组织。
+          申请时请准备好对应截图，并备注你的游戏昵称。
+        </p>
+
+        <div class="apply-tags">
+          <span>紫水晶结算topk</span>
+          <span>长期活跃</span>
+          <span>愿意交流</span>
+          <span>竞技导向</span>
+        </div>
+
+        <div class="apply-process">
+
+          <div class="apply-step">
+
+            <div class="apply-step-index">
+              1
             </div>
 
-            <h3 class="apply-title">
-              Ready to join
-              <span>VEA</span>?
-            </h3>
+            <div>
+              <strong>
+                联系负责人
+              </strong>
 
-            <p class="apply-desc">
-              我们欢迎稳定活跃、热爱竞技、愿意交流的皇室战争玩家加入组织。
-              申请时请准备好对应截图，并备注你的游戏昵称。
-            </p>
-
-            <div class="apply-tags">
-              <span>紫水晶结算topk</span>
-              <span>长期活跃</span>
-              <span>愿意交流</span>
-              <span>竞技导向</span>
-            </div>
-
-            <div class="apply-process">
-
-              <div class="apply-step">
-
-                <div class="apply-step-index">
-                  1
-                </div>
-
-                <div>
-                  <strong>
-                    添加首领微信
-                  </strong>
-
-                  <p>
-                    添加后备注「VEA申请 + 游戏昵称」。
-                  </p>
-                </div>
-
-              </div>
-
-              <div class="apply-step">
-
-                <div class="apply-step-index">
-                  2
-                </div>
-
-                <div>
-                  <strong>
-                    准备审核材料
-                  </strong>
-
-                  <p>
-                    请准备个人主页截图与当前段位相关截图。
-                  </p>
-                </div>
-
-              </div>
-
-              <div class="apply-step">
-
-                <div class="apply-step-index">
-                  3
-                </div>
-
-                <div>
-                  <strong>
-                    加入组织
-                  </strong>
-
-                  <p>
-                    审核通过后，管理员会邀请你进入组织交流群。
-                  </p>
-                </div>
-
-              </div>
-
+              <p>
+                联系时请备注「VEA申请 + 游戏昵称」。
+              </p>
             </div>
 
           </div>
 
-          <div class="apply-right">
+          <div class="apply-step">
 
-            <div class="apply-contact-card">
+            <div class="apply-step-index">
+              2
+            </div>
 
-              <div class="contact-content">
+            <div>
+              <strong>
+                准备审核材料
+              </strong>
 
-                <h3>
-                  申请通道
-                </h3>
+              <p>
+                请准备个人主页截图与当前段位相关截图。
+              </p>
+            </div>
 
-                <p>
-                  当前长期开放招新。
-                  符合要求的玩家可直接通过以下联系方式申请。
-                </p>
+          </div>
 
-                <div class="wechat-card">
+          <div class="apply-step">
 
-                  <div class="wechat-label">
-                    Leader WeChat
-                  </div>
+            <div class="apply-step-index">
+              3
+            </div>
 
-                  <div class="wechat-id">
-                    zczzcz050923
-                  </div>
+            <div>
+              <strong>
+                加入组织
+              </strong>
 
-                  <div class="wechat-tip">
-                    备注：VEA申请 + 游戏昵称
-                  </div>
-
-                </div>
-
-                <div class="contact-mini-tags">
-                  <span>审核制加入</span>
-                  <span>长期开放</span>
-                  <span>内部赛事</span>
-                </div>
-
-                <p class="contact-note">
-                  为保证组织质量与交流氛围，
-                  申请将进行基础审核。
-                </p>
-
-              </div>
-
+              <p>
+                审核通过后，管理员会邀请你进入组织交流群。
+              </p>
             </div>
 
           </div>
@@ -4034,310 +3891,362 @@
 
       </div>
 
-    </section>
+      <div class="apply-right">
 
-  </main>
+        <div class="apply-contact-card">
 
-  <footer>
+          <div class="contact-content">
 
-    <p>
-      VEA 为玩家自发组织，
-      与 Supercell 及《皇室战争》官方无隶属关系。
-      本网站仅用于玩家组织展示与招新，不代表官方立场。
-    </p>
+            <h3>
+              申请通道
+            </h3>
 
-    <p class="site-credit">
-      网站制作人：VEA丨思远
-      <br>
-      B站名称：
-      <a
-        href="https://space.bilibili.com/400209883"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        CHN丨骞翮思远翥
-      </a>
-    </p>
+            <p>
+              当前长期开放招新。
+              符合要求的玩家可直接通过以下联系方式申请。
+            </p>
 
-  </footer>
+            <div class="wechat-card">
 
-  <script>
-    (() => {
+              <div class="wechat-label">
+                联系方式
+              </div>
 
-      const reducedMotion =
-        window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches;
+              <div class="wechat-id">
+                17358226859
+              </div>
 
-      const header =
-        document.querySelector("header");
+              <div class="wechat-tip">
+                备注：VEA申请 + 游戏昵称
+              </div>
 
-      const navLinks =
-        [...document.querySelectorAll("nav a")];
+            </div>
 
-      const sections =
-        [...document.querySelectorAll("main section[id]")];
+            <div class="contact-mini-tags">
+              <span>审核制加入</span>
+              <span>长期开放</span>
+              <span>内部赛事</span>
+            </div>
 
-      const updateHeader = () => {
+            <p class="contact-note">
+              为保证组织质量与交流氛围，
+              申请将进行基础审核。
+            </p>
 
-        header.classList.toggle(
-          "is-scrolled",
-          window.scrollY > 18
-        );
+          </div>
 
-      };
+        </div>
 
-      const updateActiveNav = () => {
+      </div>
 
-        const scrollPos =
-          window.scrollY + 150;
+    </div>
 
-        let currentId = "";
+  </div>
 
-        sections.forEach((section) => {
+</section>
 
-          if (
-            scrollPos >=
-            section.offsetTop
-          ) {
-            currentId =
-              section.id;
-          }
+</main>
 
-        });
+<footer>
 
-        navLinks.forEach((link) => {
+  <p>
+    VEA 为玩家自发组织，
+    与 Supercell 及《皇室战争》官方无隶属关系。
+    本网站仅用于玩家组织展示与招新，不代表官方立场。
+  </p>
 
-          const target =
-            link
-              .getAttribute("href")
-              .replace("#", "");
+  <p class="site-credit">
+    网站制作人：VEA丨思远
+    <br>
+    B站名称：
+    <a
+      href="https://space.bilibili.com/400209883"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      CHN丨骞翮思远翥
+    </a>
+  </p>
 
-          link.classList.toggle(
-            "active",
-            target === currentId
-          );
+</footer>
 
-        });
+<script>
+(() => {
 
-      };
+  const reducedMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
+  const header =
+    document.querySelector("header");
+
+  const navLinks =
+    [...document.querySelectorAll("nav a")];
+
+  const sections =
+    [...document.querySelectorAll("main section[id]")];
+
+  const updateHeader = () => {
+
+    header.classList.toggle(
+      "is-scrolled",
+      window.scrollY > 18
+    );
+
+  };
+
+  const updateActiveNav = () => {
+
+    const scrollPos =
+      window.scrollY + 150;
+
+    let currentId = "";
+
+    sections.forEach((section) => {
+
+      if (
+        scrollPos >=
+        section.offsetTop
+      ) {
+        currentId =
+          section.id;
+      }
+
+    });
+
+    navLinks.forEach((link) => {
+
+      const target =
+        link
+          .getAttribute("href")
+          .replace("#", "");
+
+      link.classList.toggle(
+        "active",
+        target === currentId
+      );
+
+    });
+
+  };
+
+  updateHeader();
+  updateActiveNav();
+
+  window.addEventListener(
+    "scroll",
+    () => {
       updateHeader();
       updateActiveNav();
+    },
+    {
+      passive: true
+    }
+  );
 
-      window.addEventListener(
-        "scroll",
-        () => {
-          updateHeader();
-          updateActiveNav();
-        },
-        {
-          passive: true
+  const revealTargets = [
+    ...document.querySelectorAll(
+      [
+        ".section-heading",
+        ".about-card",
+        ".feature-panel",
+        ".event-shell",
+        ".requirement-card",
+        ".apply-shell",
+        ".slogan-band"
+      ].join(",")
+    )
+  ];
+
+  if (!reducedMotion) {
+
+    revealTargets.forEach(
+      (element, index) => {
+
+        element.setAttribute(
+          "data-reveal",
+          ""
+        );
+
+        element.style.setProperty(
+          "--reveal-delay",
+          `${(index % 3) * 80}ms`
+        );
+
+      }
+    );
+
+    requestAnimationFrame(() => {
+
+      document.body.classList.add(
+        "motion-ready"
+      );
+
+      document
+        .querySelectorAll(
+          "[data-hero]"
+        )
+        .forEach(
+          (element, index) => {
+
+            window.setTimeout(
+              () =>
+                element
+                  .classList
+                  .add("is-visible"),
+              80 + index * 105
+            );
+
+          }
+        );
+
+    });
+
+    if (
+      "IntersectionObserver"
+      in window
+    ) {
+
+      const observer =
+        new IntersectionObserver(
+          (
+            entries,
+            currentObserver
+          ) => {
+
+            entries.forEach(
+              (entry) => {
+
+                if (
+                  !entry.isIntersecting
+                ) {
+                  return;
+                }
+
+                entry.target
+                  .classList
+                  .add("is-visible");
+
+                currentObserver
+                  .unobserve(
+                    entry.target
+                  );
+
+              }
+            );
+
+          },
+          {
+            threshold: 0.12,
+            rootMargin:
+              "0px 0px -42px 0px"
+          }
+        );
+
+      revealTargets.forEach(
+        (element) => {
+
+          observer.observe(
+            element
+          );
+
         }
       );
 
-      const revealTargets = [
-        ...document.querySelectorAll(
-          [
-            ".section-heading",
-            ".about-card",
-            ".feature-panel",
-            ".event-shell",
-            ".requirement-card",
-            ".apply-shell",
-            ".slogan-band"
-          ].join(",")
-        )
-      ];
+    } else {
 
-      if (!reducedMotion) {
+      revealTargets.forEach(
+        (element) => {
 
-        revealTargets.forEach(
-          (element, index) => {
-
-            element.setAttribute(
-              "data-reveal",
-              ""
-            );
-
-            element.style.setProperty(
-              "--reveal-delay",
-              `${(index % 3) * 80}ms`
-            );
-
-          }
-        );
-
-        requestAnimationFrame(() => {
-
-          document.body.classList.add(
-            "motion-ready"
-          );
-
-          document
-            .querySelectorAll(
-              "[data-hero]"
-            )
-            .forEach(
-              (element, index) => {
-
-                window.setTimeout(
-                  () =>
-                    element
-                      .classList
-                      .add("is-visible"),
-                  80 + index * 105
-                );
-
-              }
-            );
-
-        });
-
-        if (
-          "IntersectionObserver"
-          in window
-        ) {
-
-          const observer =
-            new IntersectionObserver(
-              (
-                entries,
-                currentObserver
-              ) => {
-
-                entries.forEach(
-                  (entry) => {
-
-                    if (
-                      !entry.isIntersecting
-                    ) {
-                      return;
-                    }
-
-                    entry.target
-                      .classList
-                      .add("is-visible");
-
-                    currentObserver
-                      .unobserve(
-                        entry.target
-                      );
-
-                  }
-                );
-
-              },
-              {
-                threshold: 0.12,
-                rootMargin:
-                  "0px 0px -42px 0px"
-              }
-            );
-
-          revealTargets.forEach(
-            (element) => {
-
-              observer.observe(
-                element
-              );
-
-            }
-          );
-
-        } else {
-
-          revealTargets.forEach(
-            (element) => {
-
-              element
-                .classList
-                .add("is-visible");
-
-            }
-          );
+          element
+            .classList
+            .add("is-visible");
 
         }
+      );
 
-        const visual =
-          document.querySelector(
-            ".visual"
-          );
+    }
 
-        const heroWrap =
-          document.querySelector(
-            ".hero-character-wrap"
-          );
+    const visual =
+      document.querySelector(
+        ".visual"
+      );
 
-        const rankCard =
-          document.querySelector(
-            ".rank-card"
-          );
+    const heroWrap =
+      document.querySelector(
+        ".hero-character-wrap"
+      );
 
-        const desktopPointer =
-          window.matchMedia(
-            "(hover: hover) and (pointer: fine)"
-          ).matches;
+    const rankCard =
+      document.querySelector(
+        ".rank-card"
+      );
 
-        if (
-          visual &&
-          heroWrap &&
-          rankCard &&
-          desktopPointer
-        ) {
+    const desktopPointer =
+      window.matchMedia(
+        "(hover: hover) and (pointer: fine)"
+      ).matches;
 
-          visual.addEventListener(
-            "mousemove",
-            (event) => {
+    if (
+      visual &&
+      heroWrap &&
+      rankCard &&
+      desktopPointer
+    ) {
 
-              const rect =
-                visual
-                  .getBoundingClientRect();
+      visual.addEventListener(
+        "mousemove",
+        (event) => {
 
-              const x =
-                (
-                  event.clientX -
-                  rect.left
-                ) /
-                rect.width -
-                0.5;
+          const rect =
+            visual
+              .getBoundingClientRect();
 
-              const y =
-                (
-                  event.clientY -
-                  rect.top
-                ) /
-                rect.height -
-                0.5;
+          const x =
+            (
+              event.clientX -
+              rect.left
+            ) /
+            rect.width -
+            0.5;
 
-              heroWrap.style.transform =
-                `translate(${x * 12}px, ${y * 10}px)`;
+          const y =
+            (
+              event.clientY -
+              rect.top
+            ) /
+            rect.height -
+            0.5;
 
-              rankCard.style.transform =
-                `translate(${x * -5}px, ${y * -5}px)`;
+          heroWrap.style.transform =
+            `translate(${x * 12}px, ${y * 10}px)`;
 
-            }
-          );
-
-          visual.addEventListener(
-            "mouseleave",
-            () => {
-
-              heroWrap.style.transform =
-                "translate(0, 0)";
-
-              rankCard.style.transform =
-                "translate(0, 0)";
-
-            }
-          );
+          rankCard.style.transform =
+            `translate(${x * -5}px, ${y * -5}px)`;
 
         }
+      );
 
-      }
+      visual.addEventListener(
+        "mouseleave",
+        () => {
 
-    })();
-  </script>
+          heroWrap.style.transform =
+            "translate(0, 0)";
+
+          rankCard.style.transform =
+            "translate(0, 0)";
+
+        }
+      );
+
+    }
+
+  }
+
+})();
+</script>
 
 </body>
 </html>
