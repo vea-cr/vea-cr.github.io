@@ -55,7 +55,7 @@
       backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 20;
       transition: padding 0.28s ease, background 0.28s ease, border-color 0.28s ease,
         box-shadow 0.28s ease;
     }
@@ -93,6 +93,11 @@
       color: #facc15;
     }
 
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
     nav a {
       color: #d1d5db;
       text-decoration: none;
@@ -103,7 +108,8 @@
       transition: color 0.22s ease;
     }
 
-    nav a:hover {
+    nav a:hover,
+    nav a.active {
       color: #facc15;
     }
 
@@ -121,7 +127,8 @@
       transition: transform 0.22s ease;
     }
 
-    nav a:hover::after {
+    nav a:hover::after,
+    nav a.active::after {
       transform: scaleX(1);
     }
 
@@ -147,6 +154,20 @@
       align-items: center;
       min-height: calc(100vh - 88px);
       position: relative;
+    }
+
+    .hero::before {
+      content: "VEIL ETHEREAL AURORA";
+      position: absolute;
+      right: 6%;
+      top: 8%;
+      font-size: clamp(28px, 5vw, 78px);
+      font-weight: 950;
+      letter-spacing: 8px;
+      color: rgba(255, 255, 255, 0.035);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
     }
 
     .cr-logo {
@@ -249,9 +270,10 @@
 
     .visual {
       position: relative;
-      min-height: 560px;
+      min-height: 620px;
       display: grid;
       place-items: center;
+      isolation: isolate;
     }
 
     .visual::before {
@@ -283,51 +305,187 @@
       animation: glow-drift 8s ease-in-out infinite alternate;
     }
 
+    .arena-ring {
+      position: absolute;
+      width: min(560px, 90vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      z-index: 0;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.06) 0 1px, transparent 1px),
+        radial-gradient(circle, transparent 48%, rgba(250, 204, 21, 0.14) 49%, transparent 50%),
+        radial-gradient(circle, transparent 60%, rgba(167, 139, 250, 0.12) 61%, transparent 62%);
+      background-size: 22px 22px, 100% 100%, 100% 100%;
+      opacity: 0.3;
+      pointer-events: none;
+      animation: arena-spin 18s linear infinite;
+    }
+
+    .visual-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.75;
+      filter: blur(0.3px);
+      animation: particle-float var(--dur, 7s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .particle.gold {
+      background: rgba(250, 204, 21, 0.9);
+      box-shadow: 0 0 16px rgba(250, 204, 21, 0.38);
+    }
+
+    .particle.purple {
+      background: rgba(192, 132, 252, 0.9);
+      box-shadow: 0 0 16px rgba(192, 132, 252, 0.34);
+    }
+
+    .hero-character-wrap,
+    .rank-card {
+      transition: transform 0.22s ease;
+      will-change: transform;
+    }
+
+    .hero-character-wrap {
+      z-index: 2;
+    }
+
     .hero-character {
       width: min(560px, 92vw);
       max-height: 620px;
       object-fit: contain;
       filter: drop-shadow(0 36px 55px rgba(0, 0, 0, 0.65));
-      z-index: 2;
       animation: character-float 5.8s ease-in-out infinite;
       will-change: transform;
+      display: block;
     }
 
     .rank-card {
       position: absolute;
       right: 4%;
       bottom: 4%;
-      width: min(360px, 86vw);
-      padding: 26px;
+      width: min(380px, 88vw);
+      padding: 28px;
       border-radius: 28px;
-      background: rgba(16, 24, 40, 0.74);
+      background:
+        linear-gradient(135deg, rgba(250, 204, 21, 0.12), rgba(167, 139, 250, 0.13)),
+        rgba(16, 24, 40, 0.78);
       border: 1px solid rgba(255, 255, 255, 0.14);
       box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
       backdrop-filter: blur(14px);
       z-index: 3;
       animation: card-float 6.2s ease-in-out infinite 0.45s;
-      transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+      overflow: hidden;
     }
 
-    .rank {
-      font-size: 18px;
-      color: #e5e7eb;
-      margin-bottom: 8px;
+    .rank-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(255,255,255,0.08), transparent 36%),
+        radial-gradient(circle at top right, rgba(250, 204, 21, 0.16), transparent 34%);
+      pointer-events: none;
+    }
+
+    .rank-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .rank-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #facc15;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+    }
+
+    .rank-tier {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      font-size: 20px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.26), rgba(167, 139, 250, 0.28));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+    }
+
+    .rank-title {
+      font-size: 13px;
+      color: #cbd5e1;
       font-weight: 800;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
     }
 
     .number {
-      font-size: 60px;
+      font-size: clamp(36px, 5vw, 56px);
       font-weight: 950;
-      color: #c084fc;
-      margin-bottom: 10px;
-      line-height: 1;
+      color: #f9fafb;
+      margin-bottom: 8px;
+      line-height: 1.02;
+      position: relative;
+      z-index: 1;
     }
 
-    .rank-card p {
+    .rank-sub {
+      color: #a78bfa;
+      font-size: 16px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .rank-desc {
       color: #d1d5db;
       line-height: 1.75;
       font-weight: 600;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .rank-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .rank-tags span {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #e5e7eb;
+      font-size: 12px;
+      font-weight: 800;
     }
 
     section {
@@ -338,6 +496,15 @@
       font-size: 38px;
       margin-bottom: 30px;
       letter-spacing: -1px;
+    }
+
+    .section-subtitle {
+      margin-top: -12px;
+      margin-bottom: 26px;
+      color: #cbd5e1;
+      font-size: 15px;
+      line-height: 1.8;
+      font-weight: 600;
     }
 
     .grid {
@@ -413,62 +580,168 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
+    .honor-item strong {
+      color: #facc15;
+    }
+
+    .event-shell {
+      position: relative;
+      padding: 34px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at top left, rgba(250, 204, 21, 0.12), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(167, 139, 252, 0.16), transparent 30%),
+        rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+    }
+
+    .event-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(255,255,255,0.05), transparent 30%);
+      pointer-events: none;
+    }
+
+    .event-section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-end;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .event-kicker {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #a78bfa;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .event-archive-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #e5e7eb;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
     .event-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
       gap: 18px;
+      position: relative;
+      z-index: 1;
     }
     
     .event-card {
-      padding: 22px;
-      border-radius: 22px;
+      padding: 26px;
+      border-radius: 24px;
       background: rgba(255, 255, 255, 0.075);
       border: 1px solid rgba(255, 255, 255, 0.11);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+      position: relative;
+      overflow: hidden;
     }
-    
-    .event-head {
+
+    .event-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.05), transparent 36%);
+      pointer-events: none;
+    }
+
+    .event-topline {
       display: flex;
       justify-content: space-between;
       gap: 14px;
       align-items: flex-start;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
     }
-    
+
+    .event-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(250, 204, 21, 0.12);
+      border: 1px solid rgba(250, 204, 21, 0.26);
+      color: #facc15;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
     .event-head h3 {
       color: #facc15;
-      font-size: 21px;
-      line-height: 1.25;
+      font-size: 25px;
+      line-height: 1.2;
+      margin-bottom: 6px;
     }
-    
-    .event-head span {
+
+    .event-date {
       color: #cbd5e1;
       font-size: 14px;
       font-weight: 800;
-      white-space: nowrap;
     }
-    
+
     .event-mode {
       color: #e5e7eb;
       font-size: 15px;
       font-weight: 700;
-      line-height: 1.6;
+      line-height: 1.7;
       margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .event-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .event-meta span {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #dbe3ee;
+      font-size: 13px;
+      font-weight: 700;
     }
     
     .podium {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .podium-two {
       grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      position: relative;
+      z-index: 1;
     }
     
     .podium div {
-      padding: 10px;
-      border-radius: 14px;
+      padding: 16px 14px;
+      border-radius: 18px;
       background: rgba(255, 255, 255, 0.07);
       border: 1px solid rgba(255, 255, 255, 0.1);
       text-align: center;
@@ -479,16 +752,28 @@
       color: #9ca3af;
       font-size: 12px;
       font-weight: 800;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
+      letter-spacing: 0.4px;
+    }
+
+    .podium .champion span {
+      color: #facc15;
     }
     
     .podium strong {
       color: #ffffff;
-      font-size: 14px;
+      font-size: 15px;
+      line-height: 1.55;
     }
-    
-    .honor-item strong {
-      color: #facc15;
+
+    .event-note {
+      margin-top: 16px;
+      color: #cbd5e1;
+      line-height: 1.75;
+      font-size: 14px;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
     }
 
     .apply-box {
@@ -529,12 +814,6 @@
       color: #cbd5e1 !important;
     }
 
-    .site-credit {
-      margin-top: 14px;
-      color: #d1d5db;
-      font-weight: 700;
-    }
-
     footer {
       margin-top: 40px;
       padding: 34px 8%;
@@ -570,6 +849,7 @@
 
       .info-box,
       .event-card,
+      .event-shell,
       .honor,
       .honor-item,
       .apply-box {
@@ -584,6 +864,7 @@
         box-shadow: 0 25px 58px rgba(0, 0, 0, 0.3);
       }
 
+      .event-shell:hover,
       .honor:hover,
       .apply-box:hover {
         transform: translateY(-4px);
@@ -683,6 +964,26 @@
       }
     }
 
+    @keyframes particle-float {
+      0%, 100% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.35;
+      }
+      50% {
+        transform: translate3d(var(--dx, 12px), var(--dy, -18px), 0) scale(1.15);
+        opacity: 1;
+      }
+    }
+
+    @keyframes arena-spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
     @media (max-width: 920px) {
       nav {
         display: none;
@@ -702,15 +1003,19 @@
         padding: 58px 6% 62px;
       }
 
+      .hero::before {
+        display: none;
+      }
+
       .visual {
-        min-height: 440px;
+        min-height: 460px;
       }
 
       .rank-card {
         position: relative;
         right: auto;
         bottom: auto;
-        margin-top: -40px;
+        margin-top: -26px;
       }
 
       section {
@@ -719,8 +1024,14 @@
 
       .grid,
       .honor,
-      .event-grid {
+      .podium {
         grid-template-columns: 1fr;
+      }
+
+      .event-section-head,
+      .event-topline {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
       .quick-stats {
@@ -728,7 +1039,7 @@
       }
 
       .number {
-        font-size: 52px;
+        font-size: 44px;
       }
     }
 
@@ -803,12 +1114,42 @@
       </div>
 
       <div class="visual" data-hero>
-        <img class="hero-character" src="Knight.png" alt="VEA Clash Royale character">
+        <div class="arena-ring"></div>
+
+        <div class="visual-particles" aria-hidden="true">
+          <span class="particle gold" style="width:8px;height:8px;left:14%;top:16%;--dx:14px;--dy:-22px;--dur:7.8s;--delay:0.3s;"></span>
+          <span class="particle purple" style="width:6px;height:6px;left:24%;top:72%;--dx:-10px;--dy:-18px;--dur:6.9s;--delay:1.2s;"></span>
+          <span class="particle gold" style="width:10px;height:10px;left:67%;top:21%;--dx:10px;--dy:-24px;--dur:8.2s;--delay:0.8s;"></span>
+          <span class="particle purple" style="width:7px;height:7px;left:81%;top:46%;--dx:-12px;--dy:-20px;--dur:7.2s;--delay:1.7s;"></span>
+          <span class="particle gold" style="width:5px;height:5px;left:72%;top:74%;--dx:8px;--dy:-16px;--dur:6.6s;--delay:0.5s;"></span>
+          <span class="particle purple" style="width:9px;height:9px;left:34%;top:30%;--dx:-8px;--dy:-22px;--dur:8.6s;--delay:1.4s;"></span>
+          <span class="particle gold" style="width:6px;height:6px;left:49%;top:10%;--dx:12px;--dy:-18px;--dur:7.4s;--delay:2s;"></span>
+          <span class="particle purple" style="width:5px;height:5px;left:12%;top:48%;--dx:9px;--dy:-14px;--dur:6.8s;--delay:0.9s;"></span>
+        </div>
+
+        <div class="hero-character-wrap">
+          <img class="hero-character" src="Knight.png" alt="VEA Clash Royale character">
+        </div>
 
         <div class="rank-card">
-          <div class="rank">当前招新门槛</div>
+          <div class="rank-header">
+            <div class="rank-badge">RECRUITMENT REQUIREMENT</div>
+            <div class="rank-tier">👑</div>
+          </div>
+
+          <div class="rank-title">VEA Rank Card</div>
           <div class="number">紫水晶结算topk</div>
-          <p>段位要求。申请者需具备稳定活跃度、基本沟通能力，以及对皇室战争竞技内容的长期兴趣。</p>
+          <div class="rank-sub">Competitive · Active · Long-term</div>
+
+          <p class="rank-desc">
+            当前招新以稳定竞技能力为核心标准。申请者需具备长期活跃度、基本沟通能力，并愿意参与组织内部交流与赛事活动。
+          </p>
+
+          <div class="rank-tags">
+            <span>高活跃玩家</span>
+            <span>长期参与</span>
+            <span>竞技导向</span>
+          </div>
         </div>
       </div>
     </section>
@@ -864,51 +1205,51 @@
 
     <section id="events">
       <h2 class="section-title">内部赛事</h2>
-    
-      <div class="event-grid">
-        <article class="event-card">
-          <div class="event-head">
-            <h3>端午节特别赛事</h3>
-            <span>6.19 - 6.21 · 20:00-22:00</span>
+      <p class="section-subtitle">以内部锦标赛与练习赛为核心，持续记录 VEA 的赛事档案与组织活跃度。</p>
+
+      <div class="event-shell">
+        <div class="event-section-head">
+          <div>
+            <span class="event-kicker">Tournament Archive</span>
+            <h3 style="font-size: 30px; letter-spacing: -0.5px;">VEA 赛事档案</h3>
           </div>
+          <div class="event-archive-badge">🏆 持续更新中</div>
+        </div>
     
-          <p class="event-mode">模式：锦标赛 1v1 模式（五个负场）</p>
-    
-          <div class="podium">
-            <div>
-              <span>冠军</span>
-              <strong>待记录</strong>
+        <div class="event-grid">
+          <article class="event-card">
+            <div class="event-topline">
+              <div class="event-head">
+                <h3>第三届内部 KOH 练习赛</h3>
+                <div class="event-date">6.11 · 20:00 开始</div>
+              </div>
+              <div class="event-status">已归档</div>
             </div>
-            <div>
-              <span>亚军</span>
-              <strong>待记录</strong>
-            </div>
-            <div>
-              <span>季军</span>
-              <strong>待记录</strong>
-            </div>
-          </div>
-        </article>
-    
-        <article class="event-card">
-          <div class="event-head">
-            <h3>第三届内部 KOH 练习赛</h3>
-            <span>6.11 · 20:00 开始</span>
-          </div>
         
-          <p class="event-mode">模式：KOH 对抗赛 · 8v8 分队对决</p>
+            <p class="event-mode">模式：KOH 对抗赛 · 8v8 分队对决</p>
+
+            <div class="event-meta">
+              <span>内部对抗</span>
+              <span>团队练习赛</span>
+              <span>赛事记录保留</span>
+            </div>
         
-          <div class="podium podium-two">
-            <div>
-              <span>冠军</span>
-              <strong>左耳<br>安菲尔德的夜</strong>
+            <div class="podium">
+              <div class="champion">
+                <span>👑 冠军</span>
+                <strong>左耳<br>安菲尔德的夜</strong>
+              </div>
+              <div>
+                <span>亚军</span>
+                <strong>飞<br>神之一手</strong>
+              </div>
             </div>
-            <div>
-              <span>亚军</span>
-              <strong>飞<br>神之一手</strong>
-            </div>
-          </div>
-        </article>
+
+            <p class="event-note">
+              该赛事作为组织内部 KOH 系列练习赛之一，主要用于提升成员实战交流与团队协作氛围。后续赛事记录将继续收录于此。
+            </p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -984,50 +1325,92 @@
     (() => {
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const header = document.querySelector("header");
+      const navLinks = [...document.querySelectorAll("nav a")];
+      const sections = [...document.querySelectorAll("main section[id]")];
 
       const updateHeader = () => {
         header.classList.toggle("is-scrolled", window.scrollY > 18);
       };
 
-      updateHeader();
-      window.addEventListener("scroll", updateHeader, { passive: true });
+      const updateActiveNav = () => {
+        const scrollPos = window.scrollY + 140;
 
-      if (reducedMotion) return;
+        let currentId = "";
+        sections.forEach((section) => {
+          if (scrollPos >= section.offsetTop) {
+            currentId = section.id;
+          }
+        });
+
+        navLinks.forEach((link) => {
+          const target = link.getAttribute("href").replace("#", "");
+          link.classList.toggle("active", target === currentId);
+        });
+      };
+
+      updateHeader();
+      updateActiveNav();
+
+      window.addEventListener("scroll", () => {
+        updateHeader();
+        updateActiveNav();
+      }, { passive: true });
 
       const revealTargets = [
-        ...document.querySelectorAll(".section-title, .info-box, .honor, .event-card, .apply-box")
+        ...document.querySelectorAll(".section-title, .section-subtitle, .info-box, .honor, .event-shell, .event-card, .apply-box")
       ];
 
-      revealTargets.forEach((element, index) => {
-        element.setAttribute("data-reveal", "");
-        element.style.setProperty("--reveal-delay", `${(index % 3) * 90}ms`);
-      });
-
-      requestAnimationFrame(() => {
-        document.body.classList.add("motion-ready");
-
-        document.querySelectorAll("[data-hero]").forEach((element, index) => {
-          window.setTimeout(() => element.classList.add("is-visible"), 80 + index * 110);
+      if (!reducedMotion) {
+        revealTargets.forEach((element, index) => {
+          element.setAttribute("data-reveal", "");
+          element.style.setProperty("--reveal-delay", `${(index % 3) * 90}ms`);
         });
-      });
 
-      if (!("IntersectionObserver" in window)) {
-        revealTargets.forEach((element) => element.classList.add("is-visible"));
-        return;
-      }
+        requestAnimationFrame(() => {
+          document.body.classList.add("motion-ready");
 
-      const observer = new IntersectionObserver(
-        (entries, currentObserver) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("is-visible");
-            currentObserver.unobserve(entry.target);
+          document.querySelectorAll("[data-hero]").forEach((element, index) => {
+            window.setTimeout(() => element.classList.add("is-visible"), 80 + index * 110);
           });
-        },
-        { threshold: 0.14, rootMargin: "0px 0px -48px 0px" }
-      );
+        });
 
-      revealTargets.forEach((element) => observer.observe(element));
+        if ("IntersectionObserver" in window) {
+          const observer = new IntersectionObserver(
+            (entries, currentObserver) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("is-visible");
+                currentObserver.unobserve(entry.target);
+              });
+            },
+            { threshold: 0.14, rootMargin: "0px 0px -48px 0px" }
+          );
+
+          revealTargets.forEach((element) => observer.observe(element));
+        } else {
+          revealTargets.forEach((element) => element.classList.add("is-visible"));
+        }
+
+        const visual = document.querySelector(".visual");
+        const heroWrap = document.querySelector(".hero-character-wrap");
+        const rankCard = document.querySelector(".rank-card");
+
+        if (visual && heroWrap && rankCard && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+          visual.addEventListener("mousemove", (e) => {
+            const rect = visual.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+            heroWrap.style.transform = `translate(${x * 16}px, ${y * 14}px)`;
+            rankCard.style.transform = `translate(${x * -10}px, ${y * -8}px)`;
+          });
+
+          visual.addEventListener("mouseleave", () => {
+            heroWrap.style.transform = "translate(0, 0)";
+            rankCard.style.transform = "translate(0, 0)";
+          });
+        }
+      }
     })();
   </script>
 </body>
