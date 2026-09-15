@@ -746,8 +746,6 @@
 
     /* =========================================================
        RANK CARD
-       Desktop: deliberately kept narrow so it does not cover
-       the Knight's face.
     ========================================================= */
 
     .rank-card {
@@ -1088,7 +1086,7 @@
     }
 
     /* =========================================================
-       ABOUT - UPGRADED CARDS
+       ABOUT
     ========================================================= */
 
     .about-grid {
@@ -1488,60 +1486,54 @@
     }
 
     /* =========================================================
-       EVENTS
+       EVENTS — CROWN VERSION
     ========================================================= */
 
     .event-shell {
-      padding: 30px;
-
       position: relative;
-
-      overflow: hidden;
-
+      padding: 34px;
       border-radius: 30px;
-
-      border:
-        1px solid rgba(255,255,255,0.11);
 
       background:
         radial-gradient(
           circle at top left,
-          rgba(250,204,21,0.11),
-          transparent 26%
+          rgba(250, 204, 21, 0.12),
+          transparent 28%
         ),
         radial-gradient(
           circle at bottom right,
-          rgba(167,139,252,0.15),
-          transparent 28%
+          rgba(167, 139, 252, 0.16),
+          transparent 30%
         ),
-        rgba(255,255,255,0.052);
+        rgba(255, 255, 255, 0.06);
 
-      box-shadow:
-        0 24px 60px rgba(0,0,0,0.2);
+      border:
+        1px solid rgba(255, 255, 255, 0.12);
+
+      overflow: hidden;
     }
 
     .event-shell::before {
-      content: "KOH / 03";
+      content: "";
 
       position: absolute;
+      inset: 0;
 
-      right: 30px;
-      top: 12px;
-
-      color:
-        rgba(255,255,255,0.035);
-
-      font-size: 74px;
-      font-weight: 950;
+      background:
+        linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.05),
+          transparent 30%
+        );
 
       pointer-events: none;
     }
 
-    .event-top {
+    .event-section-head {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
       gap: 20px;
+      align-items: flex-end;
 
       margin-bottom: 24px;
 
@@ -1549,206 +1541,264 @@
       z-index: 1;
     }
 
-    .event-series {
+    .event-kicker {
+      display: inline-block;
+
+      margin-bottom: 8px;
+
       color: var(--purple);
 
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 900;
-      letter-spacing: 1.7px;
+      letter-spacing: 1px;
 
       text-transform: uppercase;
     }
 
-    .event-top h3 {
-      margin-top: 7px;
-
-      font-size: 29px;
-      letter-spacing: -0.4px;
+    .event-archive-title {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
     }
 
-    .event-status {
-      padding: 9px 13px;
+    .event-archive-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 10px 14px;
 
       border-radius: 999px;
 
-      color: var(--gold);
-
       background:
-        rgba(250,204,21,0.08);
+        rgba(255, 255, 255, 0.08);
 
       border:
-        1px solid rgba(250,204,21,0.2);
+        1px solid rgba(255, 255, 255, 0.12);
 
-      font-size: 12px;
-      font-weight: 900;
+      color: #e5e7eb;
+
+      font-size: 13px;
+      font-weight: 800;
 
       white-space: nowrap;
     }
 
-    .event-main-grid {
+    .event-grid {
       display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
+      grid-template-columns: 1fr;
       gap: 18px;
 
       position: relative;
-
       z-index: 1;
     }
 
-    .event-info {
-      padding: 22px;
+    .event-card {
+      position: relative;
 
-      border-radius: 22px;
+      padding: 26px;
+
+      border-radius: 24px;
+
+      background:
+        rgba(255, 255, 255, 0.075);
+
+      border:
+        1px solid rgba(255, 255, 255, 0.11);
+
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.22);
+
+      overflow: hidden;
+    }
+
+    .event-card::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
 
       background:
         linear-gradient(
-          145deg,
-          rgba(255,255,255,0.07),
-          rgba(255,255,255,0.035)
+          135deg,
+          rgba(250, 204, 21, 0.05),
+          transparent 36%
         );
 
-      border:
-        1px solid rgba(255,255,255,0.09);
+      pointer-events: none;
+    }
+
+    .event-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+
+      margin-bottom: 16px;
+
+      position: relative;
+      z-index: 1;
+    }
+
+    .event-head {
+      min-width: 0;
+    }
+
+    .event-head h3 {
+      margin-bottom: 6px;
+
+      color: var(--gold);
+
+      font-size: 25px;
+      line-height: 1.2;
     }
 
     .event-date {
-      margin-bottom: 14px;
+      color: #cbd5e1;
 
-      color: #aab4c4;
-
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
+    }
+
+    .event-status {
+      display: inline-flex;
+      align-items: center;
+
+      padding: 7px 12px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(250, 204, 21, 0.12);
+
+      border:
+        1px solid rgba(250, 204, 21, 0.26);
+
+      color: var(--gold);
+
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+
+      white-space: nowrap;
     }
 
     .event-mode {
       margin-bottom: 16px;
 
-      color: #f3f4f6;
+      position: relative;
+      z-index: 1;
 
-      font-size: 16px;
-      font-weight: 800;
+      color: #e5e7eb;
+
+      font-size: 15px;
+      font-weight: 700;
       line-height: 1.7;
     }
 
     .event-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 9px;
+      gap: 10px;
 
       margin-bottom: 18px;
+
+      position: relative;
+      z-index: 1;
     }
 
     .event-meta span {
-      padding: 8px 10px;
+      padding: 9px 12px;
 
       border-radius: 999px;
 
       background:
-        rgba(255,255,255,0.06);
+        rgba(255, 255, 255, 0.07);
 
       border:
-        1px solid rgba(255,255,255,0.08);
+        1px solid rgba(255, 255, 255, 0.1);
 
-      color: #cbd5e1;
-
-      font-size: 11px;
-      font-weight: 800;
-    }
-
-    .event-note {
-      color: #9ca3af;
+      color: #dbe3ee;
 
       font-size: 13px;
-      font-weight: 600;
-      line-height: 1.75;
+      font-weight: 700;
     }
 
     .podium {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 14px;
-    }
-
-    .podium-card {
-      min-height: 210px;
-
-      padding: 22px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
 
       position: relative;
+      z-index: 1;
+    }
 
-      overflow: hidden;
+    .podium > div {
+      padding: 16px 14px;
 
-      border-radius: 22px;
+      border-radius: 18px;
 
       background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,0.08),
-          rgba(255,255,255,0.035)
-        );
+        rgba(255, 255, 255, 0.07);
 
       border:
-        1px solid rgba(255,255,255,0.10);
+        1px solid rgba(255, 255, 255, 0.1);
+
+      text-align: center;
+
+      transition:
+        transform 0.24s ease,
+        border-color 0.24s ease,
+        background 0.24s ease;
     }
 
-    .podium-card::before {
-      content: "";
-
-      position: absolute;
-
-      width: 160px;
-      height: 160px;
-
-      right: -60px;
-      top: -60px;
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(167,139,250,0.16),
-          transparent 68%
-        );
-    }
-
-    .podium-card.champion {
-      border-color:
-        rgba(250,204,21,0.22);
-
+    .podium .champion {
       background:
         radial-gradient(
           circle at top right,
-          rgba(250,204,21,0.14),
-          transparent 40%
+          rgba(250, 204, 21, 0.12),
+          transparent 48%
         ),
-        rgba(255,255,255,0.06);
+        rgba(255, 255, 255, 0.075);
+
+      border-color:
+        rgba(250, 204, 21, 0.2);
     }
 
-    .podium-place {
-      margin-bottom: 8px;
+    .podium span {
+      display: block;
 
-      color: #94a3b8;
+      margin-bottom: 6px;
 
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 1.3px;
+      color: #9ca3af;
+
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
     }
 
-    .champion .podium-place {
+    .podium .champion span {
       color: var(--gold);
     }
 
-    .podium-name {
-      color: white;
+    .podium strong {
+      color: #ffffff;
 
-      font-size: 19px;
-      font-weight: 900;
-      line-height: 1.45;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .event-note {
+      margin-top: 16px;
+
+      position: relative;
+      z-index: 1;
+
+      color: #cbd5e1;
+
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.75;
     }
 
     /* =========================================================
@@ -2281,17 +2331,33 @@
           0 32px 84px rgba(0,0,0,0.42);
       }
 
-      .podium-card {
+      .event-card {
         transition:
           transform 0.25s ease,
-          border-color 0.25s ease;
+          border-color 0.25s ease,
+          box-shadow 0.25s ease;
       }
 
-      .podium-card:hover {
-        transform: translateY(-5px);
+      .event-card:hover {
+        transform: translateY(-6px);
 
         border-color:
-          rgba(167,139,250,0.25);
+          rgba(250,204,21,0.25);
+
+        box-shadow:
+          0 26px 58px rgba(0,0,0,0.28);
+      }
+
+      .podium > div:hover {
+        transform: translateY(-4px);
+
+        border-color:
+          rgba(167,139,250,0.24);
+      }
+
+      .podium .champion:hover {
+        border-color:
+          rgba(250,204,21,0.35);
       }
     }
 
@@ -2476,8 +2542,6 @@
 
     /* =========================================================
        MOBILE
-       This is a separate mobile composition, not compressed
-       desktop layout.
     ========================================================= */
 
     @media (max-width: 920px) {
@@ -2530,8 +2594,6 @@
         width: 46px;
         height: 46px;
       }
-
-      /* -------- Mobile Hero -------- */
 
       .hero {
         grid-template-columns: 1fr;
@@ -2658,8 +2720,6 @@
         grid-column: 1 / -1;
       }
 
-      /* -------- Mobile Knight -------- */
-
       .hero-character-wrap {
         width: 100%;
 
@@ -2699,9 +2759,6 @@
         width: 150px;
         height: 340px;
       }
-
-      /* On mobile the card sits below the character.
-         It never overlaps the face. */
 
       .rank-card {
         position: relative;
@@ -2750,8 +2807,6 @@
         font-size: 12px;
       }
 
-      /* -------- Mobile Sections -------- */
-
       section {
         padding:
           48px 20px;
@@ -2772,8 +2827,6 @@
 
         overflow-wrap: anywhere;
       }
-
-      /* Slogan */
 
       .slogan-band {
         padding:
@@ -2799,8 +2852,6 @@
         letter-spacing: 1.4px;
       }
 
-      /* About */
-
       .about-grid {
         grid-template-columns: 1fr;
       }
@@ -2822,8 +2873,6 @@
       .about-index {
         font-size: 48px;
       }
-
-      /* Feature panel */
 
       .feature-panel {
         grid-template-columns: 1fr;
@@ -2876,55 +2925,76 @@
         overflow-wrap: anywhere;
       }
 
-      /* Events */
+      /* Crown-version events */
 
       .event-shell {
-        padding: 21px;
+        padding: 22px;
       }
 
-      .event-shell::before {
-        font-size: 43px;
-
-        right: 12px;
-        top: 10px;
-      }
-
-      .event-top {
+      .event-section-head {
         flex-direction: column;
-
-        gap: 13px;
+        align-items: flex-start;
+        gap: 12px;
       }
 
-      .event-top h3 {
-        font-size: 24px;
+      .event-archive-title {
+        font-size: 26px;
       }
 
-      .event-main-grid {
-        grid-template-columns: 1fr;
+      .event-card {
+        padding: 20px;
       }
 
-      .event-info {
-        padding: 17px;
+      .event-topline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .event-head {
+        width: 100%;
+      }
+
+      .event-head h3 {
+        font-size: 22px;
+      }
+
+      .event-mode {
+        font-size: 14px;
+      }
+
+      .event-meta {
+        gap: 8px;
+      }
+
+      .event-meta span {
+        padding: 7px 9px;
+
+        font-size: 11px;
       }
 
       .podium {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+
         gap: 10px;
       }
 
-      .podium-card {
-        min-height: 170px;
+      .podium > div {
+        min-width: 0;
 
-        padding: 16px;
+        padding: 14px 10px;
       }
 
-      .podium-name {
-        font-size: 15px;
+      .podium strong {
+        font-size: 14px;
 
         overflow-wrap: anywhere;
       }
 
-      /* Requirements */
+      .event-note {
+        font-size: 13px;
+      }
 
       .requirement-grid {
         grid-template-columns: 1fr;
@@ -2941,8 +3011,6 @@
 
         font-size: 34px;
       }
-
-      /* Apply */
 
       .apply-shell {
         padding: 21px;
@@ -3004,10 +3072,6 @@
           30px 20px;
       }
     }
-
-    /* =========================================================
-       SMALL PHONE
-    ========================================================= */
 
     @media (max-width: 430px) {
 
@@ -3071,20 +3135,12 @@
         grid-template-columns: 1fr;
       }
 
-      .podium-card {
-        min-height: 140px;
-      }
-
       .feature-panel,
       .event-shell,
       .apply-shell {
         padding: 18px;
       }
     }
-
-    /* =========================================================
-       REDUCED MOTION
-    ========================================================= */
 
     @media (prefers-reduced-motion: reduce) {
 
@@ -3140,10 +3196,6 @@
   </header>
 
   <main>
-
-    <!-- ======================================================
-         HERO
-    ======================================================= -->
 
     <section class="hero">
 
@@ -3389,10 +3441,6 @@
 
     </section>
 
-    <!-- ======================================================
-         SLOGAN
-    ======================================================= -->
-
     <section class="slogan-band">
 
       <div class="slogan-inner">
@@ -3417,10 +3465,6 @@
       </div>
 
     </section>
-
-    <!-- ======================================================
-         ABOUT
-    ======================================================= -->
 
     <section id="about">
 
@@ -3528,10 +3572,6 @@
 
     </section>
 
-    <!-- ======================================================
-         ORGANIZATION FEATURES
-    ======================================================= -->
-
     <section id="honor">
 
       <div class="section-heading">
@@ -3629,9 +3669,7 @@
 
     </section>
 
-    <!-- ======================================================
-         EVENTS
-    ======================================================= -->
+    <!-- 皇冠版内部赛事 -->
 
     <section id="events">
 
@@ -3654,93 +3692,115 @@
 
       <div class="event-shell">
 
-        <div class="event-top">
+        <div class="event-section-head">
 
           <div>
 
-            <div class="event-series">
-              VEA Internal Series
-            </div>
+            <span class="event-kicker">
+              Tournament Archive
+            </span>
 
-            <h3>
-              第三届内部 KOH 练习赛
+            <h3 class="event-archive-title">
+              VEA 赛事档案
             </h3>
 
           </div>
 
-          <div class="event-status">
-            已归档
+          <div class="event-archive-badge">
+            🏆 持续更新中
           </div>
 
         </div>
 
-        <div class="event-main-grid">
+        <div class="event-grid">
 
-          <div class="event-info">
+          <article class="event-card">
 
-            <div class="event-date">
-              6.11 · 20:00 开始
+            <div class="event-topline">
+
+              <div class="event-head">
+
+                <h3>
+                  第三届内部 KOH 练习赛
+                </h3>
+
+                <div class="event-date">
+                  6.11 · 20:00 开始
+                </div>
+
+              </div>
+
+              <div class="event-status">
+                已归档
+              </div>
+
             </div>
 
-            <div class="event-mode">
-              KOH 对抗赛 · 8v8 分队对决
-            </div>
+            <p class="event-mode">
+              模式：KOH 对抗赛 · 8v8 分队对决
+            </p>
 
             <div class="event-meta">
-              <span>内部对抗</span>
-              <span>团队练习赛</span>
-              <span>KOH SERIES</span>
+
+              <span>
+                内部对抗
+              </span>
+
+              <span>
+                团队练习赛
+              </span>
+
+              <span>
+                赛事记录保留
+              </span>
+
+            </div>
+
+            <div class="podium">
+
+              <div class="champion">
+
+                <span>
+                  👑 冠军
+                </span>
+
+                <strong>
+                  左耳
+                  <br>
+                  安菲尔德的夜
+                </strong>
+
+              </div>
+
+              <div>
+
+                <span>
+                  亚军
+                </span>
+
+                <strong>
+                  飞
+                  <br>
+                  神之一手
+                </strong>
+
+              </div>
+
             </div>
 
             <p class="event-note">
-              作为组织内部 KOH 系列练习赛之一，
-              赛事用于强化成员实战交流与团队协作。
-              后续赛事记录将继续收录于 VEA Tournament Archive。
+              该赛事作为组织内部 KOH 系列练习赛之一，
+              主要用于提升成员实战交流与团队协作氛围。
+              后续赛事记录将继续收录于此。
             </p>
 
-          </div>
-
-          <div class="podium">
-
-            <div class="podium-card champion">
-
-              <div class="podium-place">
-                CHAMPION
-              </div>
-
-              <div class="podium-name">
-                左耳
-                <br>
-                安菲尔德的夜
-              </div>
-
-            </div>
-
-            <div class="podium-card">
-
-              <div class="podium-place">
-                RUNNER-UP
-              </div>
-
-              <div class="podium-name">
-                飞
-                <br>
-                神之一手
-              </div>
-
-            </div>
-
-          </div>
+          </article>
 
         </div>
 
       </div>
 
     </section>
-
-    <!-- ======================================================
-         REQUIREMENTS
-    ======================================================= -->
 
     <section id="requirements">
 
@@ -3815,10 +3875,6 @@
       </div>
 
     </section>
-
-    <!-- ======================================================
-         APPLY
-    ======================================================= -->
 
     <section id="apply">
 
